@@ -54,8 +54,19 @@
       };
     </script>
     <style>
-      html {
+      html, body {
+        height: 100%;
+        margin: 0;
+      }
+      main {
+        height: 100vh;
+        overflow-y: auto;
         scroll-behavior: smooth;
+        scroll-snap-type: y proximity;
+      }
+      section[id] {
+        scroll-snap-align: start;
+        min-height: 100vh;
       }
       :focus-visible {
         outline: 2px solid #4c6ee6;
@@ -167,7 +178,7 @@
     </nav>
 
     <main tabindex="-1">
-      <section id="home" class="py-20 md:py-32">
+      <section id="home" class="py-20 md:py-32 flex flex-col justify-center">
         <div class="mx-auto flex max-w-content flex-col items-center px-6 text-center">
           <p class="mb-5 inline-flex text-xs font-medium uppercase tracking-[0.16em] text-muted reveal reveal-up" style="--reveal-delay: 80ms">
             Backend Developer
@@ -192,7 +203,7 @@
         </div>
       </section>
 
-      <section id="services" class="bg-soft-stone py-20">
+      <section id="services" class="bg-soft-stone py-20 flex flex-col justify-center">
         <div class="mx-auto max-w-content px-6">
           <h2 class="text-center text-3xl font-normal md:text-5xl leading-tight tracking-[-0.01em] font-display reveal reveal-up">Ready To Tackle Your Challenges</h2>
           <p class="mx-auto mt-5 max-w-2xl text-center text-body-muted reveal reveal-up" style="--reveal-delay: 100ms">
@@ -386,7 +397,7 @@
         </div>
       </section>
 
-      <section id="stories" class="bg-soft-stone py-20">
+      <section id="stories" class="bg-soft-stone py-20 flex flex-col justify-center">
         <div class="mx-auto max-w-content px-6">
           <h2 class="text-center text-3xl font-normal md:text-5xl leading-tight tracking-[-0.01em] font-display reveal reveal-up">My Story and Approach</h2>
           <div class="mt-12 grid gap-5 md:grid-cols-2">
@@ -492,7 +503,7 @@
         </div>
       </section>
 
-      <section id="contact" class="bg-soft-stone py-24">
+      <section id="contact" class="bg-soft-stone py-24 flex flex-col justify-center">
         <div class="mx-auto max-w-content px-6">
           <div class="mx-auto max-w-xl text-center reveal reveal-up">
             <h2 class="text-3xl font-normal md:text-5xl leading-tight tracking-[-0.01em] font-display">Ready to Build?</h2>
@@ -531,11 +542,12 @@
       );
       revealElements.forEach((element) => revealObserver.observe(element));
 
+      const main = document.querySelector('main');
       const sections = document.querySelectorAll('section[id]');
       const navLinks = document.querySelectorAll('[data-nav-link]');
       if (sections.length && navLinks.length) {
         const updateActive = () => {
-          const scrollCenter = window.scrollY + window.innerHeight * 0.35;
+          const scrollCenter = main.scrollTop + main.clientHeight * 0.35;
           let current = sections[0].id;
           sections.forEach((section) => {
             const top = section.offsetTop;
@@ -548,8 +560,20 @@
             link.classList.toggle('active', link.getAttribute('href') === '#' + current)
           );
         };
-        window.addEventListener('scroll', () => requestAnimationFrame(updateActive), { passive: true });
+        main.addEventListener('scroll', () => requestAnimationFrame(updateActive), { passive: true });
         updateActive();
+        document.querySelectorAll('a[href^="#"]').forEach((link) => {
+          link.addEventListener('click', (e) => {
+            const id = link.getAttribute('href');
+            if (id && id.length > 1) {
+              const target = document.getElementById(id.slice(1));
+              if (target) {
+                e.preventDefault();
+                main.scrollTo({ top: target.offsetTop, behavior: 'smooth' });
+              }
+            }
+          });
+        });
       }
     </script>
   </body>
