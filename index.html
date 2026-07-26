@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="no-js">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -19,24 +19,35 @@
       property="og:description"
       content="Building high-performance APIs and scalable backend systems."
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Space+Grotesk:wght@400;500&display=swap" rel="stylesheet" />
+    <script>document.documentElement.classList.remove('no-js');document.documentElement.classList.add('js');</script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
         theme: {
           extend: {
             colors: {
-              bg: "#0a0a0b",
-              panel: "#121214",
-              panel2: "#18181b",
-              ink: "#f4f4f5",
-              soft: "#a1a1aa",
-              accent: "#ffffff",
+              primary: "#17171c",
+              canvas: "#ffffff",
+              "soft-stone": "#eeece7",
+              ink: "#212121",
+              "body-muted": "#616161",
+              muted: "#777777",
+              hairline: "#d9d9dd",
+              "border-light": "#e5e7eb",
+              "action-blue": "#1863dc",
+              coral: "#ff7759",
+              "coral-dark": "#c73d1e",
+              "on-primary": "#ffffff",
+            },
+            fontFamily: {
+              display: ["Space Grotesk", "system-ui", "sans-serif"],
+              body: ["Inter", "system-ui", "sans-serif"],
             },
             maxWidth: {
               content: "1200px",
-            },
-            boxShadow: {
-              glow: "0 0 0 1px rgba(255,255,255,.08), 0 20px 50px rgba(0,0,0,.45)",
             },
           },
         },
@@ -46,33 +57,58 @@
       html {
         scroll-behavior: smooth;
       }
-      body {
-        background: radial-gradient(circle at 50% -20%, #202027 0%, #0a0a0b 42%);
+      :focus-visible {
+        outline: 2px solid #4c6ee6;
+        outline-offset: 2px;
+        border-radius: 4px;
       }
-      .card-gradient {
-        background: linear-gradient(180deg, #16161a 0%, #101013 100%);
+      a:focus-visible, button:focus-visible {
+        border-radius: 9999px;
+      }
+      .skip-link {
+        position: absolute;
+        top: -100%;
+        left: 8px;
+        z-index: 100;
+        padding: 8px 16px;
+        background: #fff;
+        color: #212121;
+        border: 1px solid #d9d9dd;
+        border-radius: 8px;
+        font-size: 14px;
+        transition: top 150ms;
+      }
+      .skip-link:focus {
+        top: 8px;
+      }
+      [data-nav-link].active {
+        color: #1863dc;
+      }
+      [data-theme] [data-nav-link].active {
+        color: #1863dc;
+      }
+      img[width] {
+        max-width: 100%;
+        height: auto;
       }
       .reveal {
-        opacity: 0;
-        transition: opacity 650ms ease, transform 650ms ease;
-        transition-delay: var(--reveal-delay, 250ms);
-        will-change: transform, opacity;
-      }
-      .reveal-up {
-        transform: translateY(28px);
-      }
-      .reveal-left {
-        transform: translateX(-40px);
-      }
-      .reveal-right {
-        transform: translateX(40px);
-      }
-      .reveal.in-view {
         opacity: 1;
-        transform: translate(0, 0);
+        transform: none;
+      }
+      .js .reveal {
+        opacity: 0;
+        transition: opacity 700ms ease, transform 700ms ease;
+        transition-delay: var(--reveal-delay, 200ms);
+      }
+      .js .reveal-up {
+        transform: translateY(24px);
+      }
+      .js .reveal.in-view {
+        opacity: 1;
+        transform: translateY(0);
       }
       @media (prefers-reduced-motion: reduce) {
-        .reveal {
+        .js .reveal {
           opacity: 1;
           transform: none;
           transition: none;
@@ -80,157 +116,183 @@
       }
     </style>
   </head>
-  <body class="bg-bg text-ink antialiased">
-    <header class="sticky top-0 z-50 border-b border-white/10 bg-black/70 backdrop-blur-md">
-      <div class="mx-auto flex w-full max-w-content items-center justify-between px-6 py-4">
-        <a href="#home" class="text-sm font-semibold tracking-[0.16em] text-white">
-          OHANSYAH
+  <body class="bg-canvas text-ink font-body antialiased">
+    <a href="#home" class="skip-link">Skip to content</a>
+    <nav class="fixed bottom-4 left-1/2 -translate-x-1/2 z-50">
+      <div class="flex items-center gap-1 px-3 py-3 md:px-4 md:py-3 rounded-full bg-canvas/85 backdrop-blur-lg border border-hairline shadow-[0_4px_24px_rgba(0,0,0,0.08)]">
+        <a href="#home" data-nav-link class="flex items-center justify-center gap-2 px-3 py-2 md:px-4 rounded-full transition-colors hover:bg-hairline/30 text-ink hover:text-action-blue" aria-label="Home">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+          <span class="hidden md:inline text-sm">Home</span>
         </a>
-        <nav class="hidden items-center gap-6 text-sm text-soft md:flex">
-          <a href="#services" class="transition hover:text-white">Services</a>
-          <a href="#projects" class="transition hover:text-white">Projects</a>
-          <a href="#stories" class="transition hover:text-white">Stories</a>
-          <a href="#build" class="transition hover:text-white">Build</a>
-          <a href="#contact" class="transition hover:text-white">Contact</a>
-        </nav>
-        <a
-          href="https://github.com/ohansyah"
-          target="_blank"
-          rel="noreferrer"
-          class="rounded-full bg-white px-4 py-2 text-sm font-semibold text-black transition hover:bg-zinc-200"
-        >
-          GitHub
+        <a href="#services" data-nav-link class="flex items-center justify-center gap-2 px-3 py-2 md:px-4 rounded-full transition-colors hover:bg-hairline/30 text-ink hover:text-action-blue" aria-label="Services">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7"/>
+            <rect x="14" y="3" width="7" height="7"/>
+            <rect x="3" y="14" width="7" height="7"/>
+            <rect x="14" y="14" width="7" height="7"/>
+          </svg>
+          <span class="hidden md:inline text-sm">Services</span>
+        </a>
+        <a href="#projects" data-nav-link class="flex items-center justify-center gap-2 px-3 py-2 md:px-4 rounded-full transition-colors hover:bg-hairline/30 text-ink hover:text-action-blue" aria-label="Projects">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+          </svg>
+          <span class="hidden md:inline text-sm">Projects</span>
+        </a>
+        <a href="#stories" data-nav-link class="flex items-center justify-center gap-2 px-3 py-2 md:px-4 rounded-full transition-colors hover:bg-hairline/30 text-ink hover:text-action-blue" aria-label="Stories">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+          </svg>
+          <span class="hidden md:inline text-sm">Stories</span>
+        </a>
+        <a href="#build" data-nav-link class="flex items-center justify-center gap-2 px-3 py-2 md:px-4 rounded-full transition-colors hover:bg-hairline/30 text-ink hover:text-action-blue" aria-label="Build">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="16 18 22 12 16 6"/>
+            <polyline points="8 6 2 12 8 18"/>
+          </svg>
+          <span class="hidden md:inline text-sm">Build</span>
+        </a>
+        <a href="#contact" data-nav-link class="flex items-center justify-center gap-2 px-3 py-2 md:px-4 rounded-full transition-colors hover:bg-hairline/30 text-ink hover:text-action-blue" aria-label="Contact">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+          <span class="hidden md:inline text-sm">Contact</span>
         </a>
       </div>
-    </header>
+    </nav>
 
-    <main id="home">
-      <section class="relative overflow-hidden border-b border-white/10 py-20 md:py-36">
-        <div class="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_50%_0%,rgba(255,255,255,0.2),transparent_45%)]"></div>
-        <div class="mx-auto flex max-w-content flex-col items-center px-6 text-center reveal reveal-up">
-          <p class="mb-4 inline-flex rounded-full border border-white/20 px-4 py-1 text-xs font-medium uppercase tracking-[0.18em] text-soft reveal reveal-up" style="--reveal-delay: 80ms">
+    <main tabindex="-1">
+      <section id="home" class="py-20 md:py-32">
+        <div class="mx-auto flex max-w-content flex-col items-center px-6 text-center">
+          <p class="mb-5 inline-flex text-xs font-medium uppercase tracking-[0.16em] text-muted reveal reveal-up" style="--reveal-delay: 80ms">
             Backend Developer
           </p>
-          <h1 class="max-w-4xl text-4xl font-semibold leading-tight md:text-6xl reveal reveal-up" style="--reveal-delay: 140ms">
-            Hello World, I’m <span class="text-white">Ohansyah</span>.
+          <h1 class="max-w-4xl text-4xl leading-none tracking-[-0.03em] md:text-7xl font-display font-normal reveal reveal-up" style="--reveal-delay: 140ms">
+            Hello World, I’m <span class="text-primary">Ohansyah</span>.
           </h1>
-          <p class="mt-6 max-w-2xl text-base text-soft md:text-lg reveal reveal-up" style="--reveal-delay: 220ms">
+          <p class="mt-6 max-w-2xl text-base text-body-muted md:text-lg leading-relaxed reveal reveal-up" style="--reveal-delay: 220ms">
             I build high-performance backend systems and scalable APIs that bridge complex business
             logic with smooth user experiences.
           </p>
-          <div class="mt-10 flex flex-col gap-3 sm:flex-row reveal reveal-up" style="--reveal-delay: 300ms">
-            <a href="#projects" class="rounded-full bg-white px-6 py-3 text-sm font-semibold text-black transition hover:bg-zinc-200">
+          <div class="mt-10 flex flex-col gap-4 sm:flex-row reveal reveal-up" style="--reveal-delay: 300ms">
+            <a href="#projects" class="rounded-full bg-primary px-7 py-3 text-sm font-medium text-on-primary transition-opacity hover:opacity-90">
               Best Projects
             </a>
-            <a href="#build" class="rounded-full border border-white/20 px-6 py-3 text-sm font-semibold text-white transition hover:border-white/40">
+            <a href="#build" class="inline-flex items-center gap-1.5 text-sm text-ink border-b border-ink/30 transition-colors hover:border-action-blue hover:text-action-blue py-3">
               Build with me
+              <span class="text-lg leading-none">&rarr;</span>
             </a>
           </div>
-          <p class="mt-3 text-sm text-soft reveal reveal-up" style="--reveal-delay: 380ms">Available for freelance and collaboration opportunities</p>
+          <p class="mt-4 text-sm text-muted reveal reveal-up" style="--reveal-delay: 380ms">Available for freelance and collaboration opportunities</p>
         </div>
       </section>
 
-      <section id="services" class="border-b border-white/10 py-20">
+      <section id="services" class="bg-soft-stone py-20">
         <div class="mx-auto max-w-content px-6">
-          <h2 class="text-center text-3xl font-semibold md:text-5xl reveal reveal-up">Ready To Tackle Your Challenges</h2>
-          <p class="mx-auto mt-5 max-w-2xl text-center text-soft reveal reveal-up" style="--reveal-delay: 100ms">
+          <h2 class="text-center text-3xl font-normal md:text-5xl leading-tight tracking-[-0.01em] font-display reveal reveal-up">Ready To Tackle Your Challenges</h2>
+          <p class="mx-auto mt-5 max-w-2xl text-center text-body-muted reveal reveal-up" style="--reveal-delay: 100ms">
             From bug fixing to launching complex API architecture, every solution is optimized for
             performance, security, and long-term growth.
           </p>
 
-          <div class="mt-12 grid gap-6 md:grid-cols-2">
-            <article class="card-gradient rounded-3xl border border-white/10 p-6 reveal reveal-left">
-              <p class="text-xs uppercase tracking-[0.2em] text-soft">Service</p>
-              <h3 class="mt-3 text-xl font-semibold">Powerful Backend Engineering</h3>
-              <p class="mt-3 text-sm text-soft">Secure, scalable systems tailored for business-critical operations.</p>
+          <div class="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            <article class="rounded bg-canvas border border-hairline p-6 reveal reveal-up">
+              <h3 class="text-xl font-normal font-display">Powerful Backend Engineering</h3>
+              <p class="mt-3 text-sm text-body-muted leading-relaxed">Secure, scalable systems tailored for business-critical operations.</p>
             </article>
-            <article class="card-gradient rounded-3xl border border-white/10 p-6 reveal reveal-right" style="--reveal-delay: 60ms">
-              <p class="text-xs uppercase tracking-[0.2em] text-soft">Service</p>
-              <h3 class="mt-3 text-xl font-semibold">Web Development</h3>
-              <p class="mt-3 text-sm text-soft">Responsive and modern web experiences that support real business outcomes.</p>
+            <article class="rounded bg-canvas border border-hairline p-6 reveal reveal-up" style="--reveal-delay: 60ms">
+              <h3 class="text-xl font-normal font-display">Web Development</h3>
+              <p class="mt-3 text-sm text-body-muted leading-relaxed">Responsive and modern web experiences that support real business outcomes.</p>
             </article>
-            <article class="card-gradient rounded-3xl border border-white/10 p-6 reveal reveal-left" style="--reveal-delay: 100ms">
-              <p class="text-xs uppercase tracking-[0.2em] text-soft">Service</p>
-              <h3 class="mt-3 text-xl font-semibold">Seamless API Integration</h3>
-              <p class="mt-3 text-sm text-soft">Reliable integration between platforms with secure and efficient API flows.</p>
+            <article class="rounded bg-canvas border border-hairline p-6 reveal reveal-up" style="--reveal-delay: 100ms">
+              <h3 class="text-xl font-normal font-display">Seamless API Integration</h3>
+              <p class="mt-3 text-sm text-body-muted leading-relaxed">Reliable integration between platforms with secure and efficient API flows.</p>
             </article>
-            <article class="card-gradient rounded-3xl border border-white/10 p-6 reveal reveal-right" style="--reveal-delay: 140ms">
-              <p class="text-xs uppercase tracking-[0.2em] text-soft">Service</p>
-              <h3 class="mt-3 text-xl font-semibold">Custom Software Solutions</h3>
-              <p class="mt-3 text-sm text-soft">Tailored systems built around your unique process and product needs.</p>
+            <article class="rounded bg-canvas border border-hairline p-6 reveal reveal-up" style="--reveal-delay: 140ms">
+              <h3 class="text-xl font-normal font-display">Custom Software Solutions</h3>
+              <p class="mt-3 text-sm text-body-muted leading-relaxed">Tailored systems built around your unique process and product needs.</p>
             </article>
-            <article class="card-gradient rounded-3xl border border-white/10 p-6 reveal reveal-left" style="--reveal-delay: 180ms">
-              <p class="text-xs uppercase tracking-[0.2em] text-soft">Service</p>
-              <h3 class="mt-3 text-xl font-semibold">Performance Optimization</h3>
-              <p class="mt-3 text-sm text-soft">Refactoring and architecture improvements to speed up APIs and reduce load.</p>
+            <article class="rounded bg-canvas border border-hairline p-6 reveal reveal-up" style="--reveal-delay: 180ms">
+              <h3 class="text-xl font-normal font-display">Performance Optimization</h3>
+              <p class="mt-3 text-sm text-body-muted leading-relaxed">Refactoring and architecture improvements to speed up APIs and reduce load.</p>
             </article>
-            <article class="card-gradient rounded-3xl border border-white/10 p-6 reveal reveal-right" style="--reveal-delay: 220ms">
-              <p class="text-xs uppercase tracking-[0.2em] text-soft">Service</p>
-              <h3 class="mt-3 text-xl font-semibold">Bug Fixing & Troubleshooting</h3>
-              <p class="mt-3 text-sm text-soft">Fast diagnosis and pragmatic fixes for production and development issues.</p>
+            <article class="rounded bg-canvas border border-hairline p-6 reveal reveal-up" style="--reveal-delay: 220ms">
+              <h3 class="text-xl font-normal font-display">Bug Fixing & Troubleshooting</h3>
+              <p class="mt-3 text-sm text-body-muted leading-relaxed">Fast diagnosis and pragmatic fixes for production and development issues.</p>
             </article>
           </div>
         </div>
       </section>
 
-      <section id="projects" class="border-b border-white/10 py-20">
+      <section id="projects" class="py-20">
         <div class="mx-auto max-w-content px-6">
           <div class="mx-auto max-w-3xl text-center reveal reveal-up">
-            <p class="text-xs uppercase tracking-[0.2em] text-soft">Projects</p>
-            <h2 class="mt-4 text-3xl font-semibold md:text-5xl">Showcasing Excellence and Innovation</h2>
+            <p class="text-xs uppercase tracking-[0.16em] text-muted">Projects</p>
+            <h2 class="mt-4 text-3xl font-normal md:text-5xl leading-tight tracking-[-0.01em] font-display">Showcasing Excellence and Innovation</h2>
           </div>
 
-          <div class="mt-12 space-y-8">
-            <article class="rounded-3xl p-6 md:p-8 reveal reveal-up">
-              <div class="grid items-center gap-6 md:grid-cols-2 md:gap-10">
-                <img src="./img/edot/merge.webp" alt="eDot eShop" class="h-64 w-full rounded-2xl object-cover md:h-80 reveal reveal-left" />
-                <div class="reveal reveal-right" style="--reveal-delay: 70ms">
-                  <p class="text-xs uppercase tracking-[0.2em] text-soft">Project 01</p>
-                  <h3 class="mt-3 text-2xl font-semibold md:text-3xl">eDot eShop</h3>
-                  <p class="mt-4 text-base text-soft">eDOT/eSHOP is a B2B2C e-commerce application designed to streamline and enhance the FMCG activities between distributors and their network of outlets, extending all the way to end customers.</p>
-                  <ul class="mt-4 space-y-2 text-sm text-soft">
-                    <li><span class="font-semibold text-ink">Scalable Order Processing System</span><br />Built a robust system for managing orders, invoicing, and payments with high scalability.</li>
-                    <li><span class="font-semibold text-ink">Secure API Integration</span><br />Integrated payment gateways and logistics services with secure, efficient API endpoints.</li>
-                    <li><span class="font-semibold text-ink">Elasticsearch-Powered Search Functionality</span><br />Integrated Elasticsearch to enable lightning-fast, full-text search capabilities across product catalogs, improving user experience with accurate and quick search results.</li>
+          <div class="mt-12 space-y-20">
+            <article class="reveal reveal-up">
+              <div class="grid items-center gap-8 md:grid-cols-2 md:gap-12">
+                <div>
+                  <img src="./img/edot/merge.webp" alt="eDot eShop" width="3736" height="2215" loading="lazy" class="w-full rounded-[22px]" />
+                </div>
+                <div>
+                  <p class="text-xs uppercase tracking-[0.16em] text-muted">Project 01</p>
+                  <h3 class="mt-3 text-2xl font-normal md:text-3xl leading-tight tracking-[-0.01em] font-display">eDot eShop</h3>
+                  <p class="mt-4 text-base text-body-muted leading-relaxed">eDOT/eSHOP is a B2B2C e-commerce application designed to streamline and enhance the FMCG activities between distributors and their network of outlets, extending all the way to end customers.</p>
+                  <ul class="mt-4 space-y-2 text-sm text-body-muted leading-relaxed">
+                    <li><span class="font-medium text-ink">Scalable Order Processing System</span><br />Built a robust system for managing orders, invoicing, and payments with high scalability.</li>
+                    <li><span class="font-medium text-ink">Secure API Integration</span><br />Integrated payment gateways and logistics services with secure, efficient API endpoints.</li>
+                    <li><span class="font-medium text-ink">Elasticsearch-Powered Search Functionality</span><br />Integrated Elasticsearch to enable lightning-fast, full-text search capabilities across product catalogs, improving user experience with accurate and quick search results.</li>
                   </ul>
                   <div class="mt-6 flex flex-wrap gap-3">
-                    <a href="https://edot.id/en" class="rounded-full border border-white/20 px-5 py-2 text-sm font-semibold text-white transition hover:border-white/40">Project Page</a>
+                    <a href="https://edot.id/en" class="inline-flex rounded-full border border-primary/20 px-5 py-2 text-sm font-medium text-primary transition-colors hover:border-primary/50">Project Page</a>
                   </div>
                 </div>
               </div>
             </article>
 
-            <article class="rounded-3xl p-6 md:p-8 reveal reveal-up" style="--reveal-delay: 70ms">
-              <div class="grid items-center gap-6 md:grid-cols-2 md:gap-10">
-                <img src="./img/ayo/project-myayo-ayokasir.webp" alt="SRC MyAYO & AYO Kasir" class="h-64 w-full rounded-2xl object-cover md:h-80 md:order-2 reveal reveal-right" />
-                <div class="md:order-1 reveal reveal-left" style="--reveal-delay: 70ms">
-                  <p class="text-xs uppercase tracking-[0.2em] text-soft">Project 02</p>
-                  <h3 class="mt-3 text-2xl font-semibold md:text-3xl">SRC: MyAYO & AYO Kasir</h3>
-                  <p class="mt-4 text-base text-soft">AYO Kasir is a comprehensive digital ecosystem connecting wholesale partners, convenience stores, and customers. I contributed as a backend engineer to modernize store operations and build reliable services for both seller and customer workflows.</p>
-                  <ul class="mt-4 space-y-2 text-sm text-soft">
-                    <li><span class="font-semibold text-ink">Advanced Point-of-Sale (POS) System</span><br />Built core backend services for efficient in-store transactions, inventory tracking, and sales reporting.</li>
-                    <li><span class="font-semibold text-ink">Secure & Scalable Infrastructure</span><br />Built and maintained high-concurrency POS APIs for peak transactions, and integrated payment and delivery providers through robust RESTful endpoints.</li>
-                    <li><span class="font-semibold text-ink">Inventory & Downline Management</span><br />Developed multi-tier stock transfer flows and owner/store stock-switch logic with real-time supervisory inventory visibility.</li>
-                    <li><span class="font-semibold text-ink">Digital Store Operations</span><br />Digitized manual daily closing and built historical tracking for stock and payment discrepancies at national scale.</li>
-                    <li><span class="font-semibold text-ink">Automated Replenishment</span><br />Developed order recommendation and approval workflow logic to automate inventory requests and improve stock availability.</li>
+            <article class="reveal reveal-up" style="--reveal-delay: 70ms">
+              <div class="grid items-center gap-8 md:grid-cols-2 md:gap-12">
+                <div class="md:order-2">
+                  <img src="./img/ayo/project-myayo-ayokasir.webp" alt="SRC MyAYO & AYO Kasir" width="2421" height="1440" loading="lazy" class="w-full rounded-[22px]" />
+                </div>
+                <div class="md:order-1">
+                  <p class="text-xs uppercase tracking-[0.16em] text-muted">Project 02</p>
+                  <h3 class="mt-3 text-2xl font-normal md:text-3xl leading-tight tracking-[-0.01em] font-display">SRC: MyAYO & AYO Kasir</h3>
+                  <p class="mt-4 text-base text-body-muted leading-relaxed">AYO Kasir is a comprehensive digital ecosystem connecting wholesale partners, convenience stores, and customers. I contributed as a backend engineer to modernize store operations and build reliable services for both seller and customer workflows.</p>
+                  <ul class="mt-4 space-y-2 text-sm text-body-muted leading-relaxed">
+                    <li><span class="font-medium text-ink">Advanced Point-of-Sale (POS) System</span><br />Built core backend services for efficient in-store transactions, inventory tracking, and sales reporting.</li>
+                    <li><span class="font-medium text-ink">Secure & Scalable Infrastructure</span><br />Built and maintained high-concurrency POS APIs for peak transactions, and integrated payment and delivery providers through robust RESTful endpoints.</li>
+                    <li><span class="font-medium text-ink">Inventory & Downline Management</span><br />Developed multi-tier stock transfer flows and owner/store stock-switch logic with real-time supervisory inventory visibility.</li>
+                    <li><span class="font-medium text-ink">Digital Store Operations</span><br />Digitized manual daily closing and built historical tracking for stock and payment discrepancies at national scale.</li>
+                    <li><span class="font-medium text-ink">Automated Replenishment</span><br />Developed order recommendation and approval workflow logic to automate inventory requests and improve stock availability.</li>
                   </ul>
                   <div class="mt-6 flex flex-wrap gap-3">
-                    <a href="https://play.google.com/store/apps/details?id=com.pmi.limited.PMIAPPM05983&pcampaignid=web_share" class="rounded-full border border-white/20 px-5 py-2 text-sm font-semibold text-white transition hover:border-white/40">Project Page</a>
+                    <a href="https://play.google.com/store/apps/details?id=com.pmi.limited.PMIAPPM05983&pcampaignid=web_share" class="inline-flex rounded-full border border-primary/20 px-5 py-2 text-sm font-medium text-primary transition-colors hover:border-primary/50">Project Page</a>
                   </div>
                 </div>
               </div>
             </article>
 
-            <article class="rounded-3xl p-6 md:p-8 reveal reveal-up" style="--reveal-delay: 120ms">
-              <div class="grid items-center gap-6 md:grid-cols-2 md:gap-10">
-                <img src="./img/online-store/app-collection.webp" alt="Online Store OSS" class="h-64 w-full rounded-2xl object-cover md:h-80 reveal reveal-left" />
-                <div class="reveal reveal-right" style="--reveal-delay: 70ms">
-                  <p class="text-xs uppercase tracking-[0.2em] text-soft">Project 03</p>
-                  <h3 class="mt-3 text-2xl font-semibold md:text-3xl">Online Store (Open Source)</h3>
-                  <p class="mt-4 text-base text-soft">Lightweight online storefront built with the modern TALL stack (TailwindCSS, Alpine.js, Laravel, and Livewire) to deliver an elegant, responsive shopping experience with a user-friendly admin CMS. I contributed on the backend side to build reliable catalog, content, and inventory workflows for both customer and admin operations.</p>
-                  <div class="mt-4 space-y-3 text-sm text-soft">
+            <article class="reveal reveal-up" style="--reveal-delay: 120ms">
+              <div class="grid items-center gap-8 md:grid-cols-2 md:gap-12">
+                <div>
+                  <img src="./img/online-store/app-collection.webp" alt="Online Store OSS" width="1518" height="1033" loading="lazy" class="w-full rounded-[22px]" />
+                </div>
+                <div>
+                  <p class="text-xs uppercase tracking-[0.16em] text-muted">Project 03</p>
+                  <h3 class="mt-3 text-2xl font-normal md:text-3xl leading-tight tracking-[-0.01em] font-display">Online Store (Open Source)</h3>
+                  <p class="mt-4 text-base text-body-muted leading-relaxed">Lightweight online storefront built with the modern TALL stack (TailwindCSS, Alpine.js, Laravel, and Livewire) to deliver an elegant, responsive shopping experience with a user-friendly admin CMS. I contributed on the backend side to build reliable catalog, content, and inventory workflows for both customer and admin operations.</p>
+                  <div class="mt-4 space-y-3 text-sm text-body-muted leading-relaxed">
                     <div>
-                      <p><span class="font-semibold text-ink">End User Experience</span></p>
+                      <p><span class="font-medium text-ink">End User Experience</span></p>
                       <ul class="mt-2 space-y-1">
                         <li>Intuitive product search with category filters.</li>
                         <li>Engaging banner slider for promotions.</li>
@@ -239,7 +301,7 @@
                       </ul>
                     </div>
                     <div>
-                      <p><span class="font-semibold text-ink">Admin CMS Capabilities</span></p>
+                      <p><span class="font-medium text-ink">Admin CMS Capabilities</span></p>
                       <ul class="mt-2 space-y-1">
                         <li>Dashboard with real-time overview of banners, products, categories, and sections.</li>
                         <li>Fully manageable product catalog and customizable product sections.</li>
@@ -249,114 +311,118 @@
                     </div>
                   </div>
                   <div class="mt-6 flex flex-wrap gap-3">
-                    <a href="https://online-store.ohansyah.com/" class="rounded-full bg-white px-5 py-2 text-sm font-semibold text-black transition hover:bg-zinc-200">DEMO</a>
-                    <a href="https://github.com/ohansyah/online-store" class="rounded-full border border-white/20 px-5 py-2 text-sm font-semibold text-white transition hover:border-white/40">Project Page</a>
+                    <a href="https://online-store.ohansyah.com/" class="rounded-full bg-primary px-5 py-2 text-sm font-medium text-on-primary transition-opacity hover:opacity-90">DEMO</a>
+                    <a href="https://github.com/ohansyah/online-store" class="inline-flex rounded-full border border-primary/20 px-5 py-2 text-sm font-medium text-primary transition-colors hover:border-primary/50">Project Page</a>
                   </div>
                 </div>
               </div>
             </article>
 
-            <article class="rounded-3xl p-6 md:p-8 reveal reveal-up" style="--reveal-delay: 270ms">
-              <div class="grid items-center gap-6 md:grid-cols-2 md:gap-10">
-                <img src="./img/simple-pos/cashier.png" alt="Cashier Simple POS" class="h-64 w-full rounded-2xl object-cover md:h-80 reveal reveal-right md:order-2" />
-                <div class="reveal reveal-left md:order-1" style="--reveal-delay: 70ms">
-                  <p class="text-xs uppercase tracking-[0.2em] text-soft">Project 04</p>
-                  <h3 class="mt-3 text-2xl font-semibold md:text-3xl">Cashier Simple POS (Open Source)</h3>
-                  <p class="mt-4 text-base text-soft">Web-based POS system built with Laravel TALL stack and Jetstream, designed for simple but powerful order and product management with multiuser support in a single store.</p>
-                  <ul class="mt-4 space-y-2 text-sm text-soft">
-                    <li><span class="font-semibold text-ink">Transactional Backend</span><br />Implemented checkout, order summary, detailed order lifecycle, and receipt generation (print/PDF/image).</li>
-                    <li><span class="font-semibold text-ink">Store Management Modules</span><br />Built master product/category services and dashboard metrics for operational visibility.</li>
-                    <li><span class="font-semibold text-ink">Analytics & Multiuser Support</span><br />Added order charts and role-based multiuser flows to support daily store operations.</li>
+            <article class="reveal reveal-up" style="--reveal-delay: 170ms">
+              <div class="grid items-center gap-8 md:grid-cols-2 md:gap-12">
+                <div class="md:order-2">
+                  <img src="./img/simple-pos/cashier.png" alt="Cashier Simple POS" width="1241" height="894" loading="lazy" class="w-full rounded-[22px]" />
+                </div>
+                <div class="md:order-1">
+                  <p class="text-xs uppercase tracking-[0.16em] text-muted">Project 04</p>
+                  <h3 class="mt-3 text-2xl font-normal md:text-3xl leading-tight tracking-[-0.01em] font-display">Cashier Simple POS (Open Source)</h3>
+                  <p class="mt-4 text-base text-body-muted leading-relaxed">Web-based POS system built with Laravel TALL stack and Jetstream, designed for simple but powerful order and product management with multiuser support in a single store.</p>
+                  <ul class="mt-4 space-y-2 text-sm text-body-muted leading-relaxed">
+                    <li><span class="font-medium text-ink">Transactional Backend</span><br />Implemented checkout, order summary, detailed order lifecycle, and receipt generation (print/PDF/image).</li>
+                    <li><span class="font-medium text-ink">Store Management Modules</span><br />Built master product/category services and dashboard metrics for operational visibility.</li>
+                    <li><span class="font-medium text-ink">Analytics & Multiuser Support</span><br />Added order charts and role-based multiuser flows to support daily store operations.</li>
                   </ul>
                   <div class="mt-6 flex flex-wrap gap-3">
-                    <a href="https://pos.ohansyah.com/" class="rounded-full bg-white px-5 py-2 text-sm font-semibold text-black transition hover:bg-zinc-200">DEMO</a>
-                    <a href="https://github.com/ohansyah/cashier" class="rounded-full border border-white/20 px-5 py-2 text-sm font-semibold text-white transition hover:border-white/40">Project Page</a>
+                    <a href="https://pos.ohansyah.com/" class="rounded-full bg-primary px-5 py-2 text-sm font-medium text-on-primary transition-opacity hover:opacity-90">DEMO</a>
+                    <a href="https://github.com/ohansyah/cashier" class="inline-flex rounded-full border border-primary/20 px-5 py-2 text-sm font-medium text-primary transition-colors hover:border-primary/50">Project Page</a>
                   </div>
                 </div>
               </div>
             </article>
 
-            <article class="rounded-3xl p-6 md:p-8 reveal reveal-up" style="--reveal-delay: 170ms">
-              <div class="grid items-center gap-6 md:grid-cols-2 md:gap-10">
-                <img src="https://miro.medium.com/v2/resize:fit:640/format:webp/1*9djvyMKVw9WmOQkeoom86A.png" alt="Telegram Healthy Assistant Bot" class="h-64 w-full rounded-2xl object-cover md:h-80 reveal reveal-right md:order-2" />
-                <div class="reveal reveal-left md:order-1" style="--reveal-delay: 70ms">
-                  <p class="text-xs uppercase tracking-[0.2em] text-soft">Project 05</p>
-                  <h3 class="mt-3 text-2xl font-semibold md:text-3xl">Telegram Healthy Assistant Bot</h3>
-                  <p class="mt-4 text-base text-soft">A simple and extensible Telegram bot written in Go to assist users with nutrition insights, packaging OCR, and healthy-living utilities. Built with clean architecture and modular components for easy deployment and maintenance.</p>
-                  <ul class="mt-4 space-y-2 text-sm text-soft">
-                    <li><span class="font-semibold text-ink">Image OCR + AI Pipeline</span><br />Integrated OCR flow with Gemini-powered interpretation for packaging and nutrition insights.</li>
-                    <li><span class="font-semibold text-ink">Telegram Bot Integration</span><br />Implemented command and message workflows with modular bot handlers.</li>
-                    <li><span class="font-semibold text-ink">Resilient Runner</span><br />Added self-restarting execution and clean project structure for reliable operations.</li>
+            <article class="reveal reveal-up" style="--reveal-delay: 220ms">
+              <div class="grid items-center gap-8 md:grid-cols-2 md:gap-12">
+                <div>
+                  <img src="https://miro.medium.com/v2/resize:fit:640/format:webp/1*9djvyMKVw9WmOQkeoom86A.png" alt="Telegram Healthy Assistant Bot" loading="lazy" class="w-full rounded-[22px]" />
+                </div>
+                <div>
+                  <p class="text-xs uppercase tracking-[0.16em] text-muted">Project 05</p>
+                  <h3 class="mt-3 text-2xl font-normal md:text-3xl leading-tight tracking-[-0.01em] font-display">Telegram Healthy Assistant Bot</h3>
+                  <p class="mt-4 text-base text-body-muted leading-relaxed">A simple and extensible Telegram bot written in Go to assist users with nutrition insights, packaging OCR, and healthy-living utilities. Built with clean architecture and modular components for easy deployment and maintenance.</p>
+                  <ul class="mt-4 space-y-2 text-sm text-body-muted leading-relaxed">
+                    <li><span class="font-medium text-ink">Image OCR + AI Pipeline</span><br />Integrated OCR flow with Gemini-powered interpretation for packaging and nutrition insights.</li>
+                    <li><span class="font-medium text-ink">Telegram Bot Integration</span><br />Implemented command and message workflows with modular bot handlers.</li>
+                    <li><span class="font-medium text-ink">Resilient Runner</span><br />Added self-restarting execution and clean project structure for reliable operations.</li>
                   </ul>
                   <div class="mt-6 flex flex-wrap gap-3">
-                    <a href="https://github.com/ohansyah/telegram-healthy-assistant-bot" class="rounded-full border border-white/20 px-5 py-2 text-sm font-semibold text-white transition hover:border-white/40">Project Page</a>
+                    <a href="https://github.com/ohansyah/telegram-healthy-assistant-bot" class="inline-flex rounded-full border border-primary/20 px-5 py-2 text-sm font-medium text-primary transition-colors hover:border-primary/50">Project Page</a>
                   </div>
                 </div>
               </div>
             </article>
 
-            <article class="rounded-3xl p-6 md:p-8 reveal reveal-up" style="--reveal-delay: 220ms">
-              <div class="grid items-center gap-6 md:grid-cols-2 md:gap-10">
-                <img src="https://raw.githubusercontent.com/ohansyah/Go-Your-Audio-Tube/main/public/home.png" alt="YouTube Audio Proxy" class="h-64 w-full rounded-2xl object-cover md:h-80 reveal reveal-left" />
-                <div class="reveal reveal-right" style="--reveal-delay: 70ms">
-                  <p class="text-xs uppercase tracking-[0.2em] text-soft">Project 06</p>
-                  <h3 class="mt-3 text-2xl font-semibold md:text-3xl">YouTube Audio Proxy</h3>
-                  <p class="mt-4 text-base text-soft">A lightweight, high-performance Go web application that proxies YouTube audio streams for mobile-friendly background listening without ads and without storing files on the server.</p>
-                  <ul class="mt-4 space-y-2 text-sm text-soft">
-                    <li><span class="font-semibold text-ink">Direct Stream Proxying</span><br />Pipes audio from source to client using efficient stream copy with minimal memory overhead.</li>
-                    <li><span class="font-semibold text-ink">Background Playback</span><br />Implemented Media Session API support for seamless mobile background audio.</li>
-                    <li><span class="font-semibold text-ink">Privacy & Production Readiness</span><br />No persistent file/log storage, with template caching and timeout handling for stable runtime behavior.</li>
+            <article class="reveal reveal-up" style="--reveal-delay: 270ms">
+              <div class="grid items-center gap-8 md:grid-cols-2 md:gap-12">
+                <div class="md:order-2">
+                  <img src="https://raw.githubusercontent.com/ohansyah/Go-Your-Audio-Tube/main/public/home.png" alt="YouTube Audio Proxy" loading="lazy" class="w-full rounded-[22px]" />
+                </div>
+                <div class="md:order-1">
+                  <p class="text-xs uppercase tracking-[0.16em] text-muted">Project 06</p>
+                  <h3 class="mt-3 text-2xl font-normal md:text-3xl leading-tight tracking-[-0.01em] font-display">YouTube Audio Proxy</h3>
+                  <p class="mt-4 text-base text-body-muted leading-relaxed">A lightweight, high-performance Go web application that proxies YouTube audio streams for mobile-friendly background listening without ads and without storing files on the server.</p>
+                  <ul class="mt-4 space-y-2 text-sm text-body-muted leading-relaxed">
+                    <li><span class="font-medium text-ink">Direct Stream Proxying</span><br />Pipes audio from source to client using efficient stream copy with minimal memory overhead.</li>
+                    <li><span class="font-medium text-ink">Background Playback</span><br />Implemented Media Session API support for seamless mobile background audio.</li>
+                    <li><span class="font-medium text-ink">Privacy & Production Readiness</span><br />No persistent file/log storage, with template caching and timeout handling for stable runtime behavior.</li>
                   </ul>
                   <div class="mt-6 flex flex-wrap gap-3">
-                    <a href="#" class="rounded-full bg-white px-5 py-2 text-sm font-semibold text-black transition hover:bg-zinc-200">DEMO</a>
-                    <a href="https://github.com/ohansyah/Go-Your-Audio-Tube" class="rounded-full border border-white/20 px-5 py-2 text-sm font-semibold text-white transition hover:border-white/40">Project Page</a>
+                    <span class="inline-flex rounded-full bg-muted/20 px-5 py-2 text-sm font-medium text-muted cursor-not-allowed" aria-disabled="true">DEMO</span>
+                    <a href="https://github.com/ohansyah/Go-Your-Audio-Tube" class="inline-flex rounded-full border border-primary/20 px-5 py-2 text-sm font-medium text-primary transition-colors hover:border-primary/50">Project Page</a>
                   </div>
                 </div>
               </div>
             </article>
-
-            
           </div>
         </div>
       </section>
 
-      <section id="stories" class="border-b border-white/10 py-20">
+      <section id="stories" class="bg-soft-stone py-20">
         <div class="mx-auto max-w-content px-6">
-          <h2 class="text-center text-3xl font-semibold md:text-5xl reveal reveal-up">My Story and Approach</h2>
-          <div class="mt-12 grid gap-6 md:grid-cols-2">
-            <a href="https://medium.com/@ohansyah/home-lab-how-i-turned-an-old-android-tv-box-into-a-gemini-powered-ai-server-bb49bb5988d0" target="_blank" rel="noreferrer" class="card-gradient rounded-3xl border border-white/10 p-6 transition hover:border-white/30 reveal reveal-left" style="--reveal-delay: 100ms">
+          <h2 class="text-center text-3xl font-normal md:text-5xl leading-tight tracking-[-0.01em] font-display reveal reveal-up">My Story and Approach</h2>
+          <div class="mt-12 grid gap-5 md:grid-cols-2">
+            <a href="https://medium.com/@ohansyah/home-lab-how-i-turned-an-old-android-tv-box-into-a-gemini-powered-ai-server-bb49bb5988d0" target="_blank" rel="noreferrer" class="rounded-lg bg-canvas border border-hairline p-6 transition-colors hover:border-border-light reveal reveal-up" style="--reveal-delay: 100ms">
               <div class="flex items-start gap-4">
-                <img src="https://miro.medium.com/v2/resize:fit:640/format:webp/1*9djvyMKVw9WmOQkeoom86A.png" alt="Home Lab: Android TV Box to Gemini AI Server" class="h-20 w-20 rounded-xl object-cover" />
+                <img src="https://miro.medium.com/v2/resize:fit:640/format:webp/1*9djvyMKVw9WmOQkeoom86A.png" alt="Home Lab: Android TV Box to Gemini AI Server" loading="lazy" class="h-20 w-20 rounded object-cover" />
                 <div>
-                  <h3 class="text-xl font-semibold">Home Lab: Android TV Box to Gemini AI Server</h3>
-                  <p class="mt-3 text-sm text-soft">A practical experiment in cross-compilation, ARM constraints, and API efficiency.</p>
+                  <h3 class="mt-2 text-xl font-normal font-display">Home Lab: Android TV Box to Gemini AI Server</h3>
+                  <p class="mt-2 text-sm text-body-muted leading-relaxed">A practical experiment in cross-compilation, ARM constraints, and API efficiency.</p>
                 </div>
               </div>
             </a>
-            <a href="https://ohansyah.medium.com/reinventing-the-wheel-isnt-always-bad-here-s-my-experience-91558fd8c0e6" target="_blank" rel="noreferrer" class="card-gradient rounded-3xl border border-white/10 p-6 transition hover:border-white/30 reveal reveal-right" style="--reveal-delay: 200ms">
+            <a href="https://ohansyah.medium.com/reinventing-the-wheel-isnt-always-bad-here-s-my-experience-91558fd8c0e6" target="_blank" rel="noreferrer" class="rounded-lg bg-canvas border border-hairline p-6 transition-colors hover:border-border-light reveal reveal-up" style="--reveal-delay: 200ms">
               <div class="flex items-start gap-4">
-                <img src="https://miro.medium.com/v2/resize:fit:720/format:webp/1*fUsl9m4VXDldGfszrKakrw.png" alt="Reinventing the Wheel Isn’t Always Bad" class="h-20 w-20 rounded-xl object-cover" />
+                <img src="https://miro.medium.com/v2/resize:fit:720/format:webp/1*fUsl9m4VXDldGfszrKakrw.png" alt="Reinventing the Wheel Isn't Always Bad" loading="lazy" class="h-20 w-20 rounded object-cover" />
                 <div>
-                  <h3 class="text-xl font-semibold">Reinventing the Wheel Isn’t Always Bad</h3>
-                  <p class="mt-3 text-sm text-soft">Why rebuilding in your lab can sharpen architecture instincts and engineering depth.</p>
+                  <h3 class="mt-2 text-xl font-normal font-display">Reinventing the Wheel Isn't Always Bad</h3>
+                  <p class="mt-2 text-sm text-body-muted leading-relaxed">Why rebuilding in your lab can sharpen architecture instincts and engineering depth.</p>
                 </div>
               </div>
             </a>
-            <a href="https://medium.com/@ohansyah/improving-api-performance-in-laravel-guzzle-concurrent-request-c16d7952669a" target="_blank" rel="noreferrer" class="card-gradient rounded-3xl border border-white/10 p-6 transition hover:border-white/30 reveal reveal-left" style="--reveal-delay: 300ms">
+            <a href="https://medium.com/@ohansyah/improving-api-performance-in-laravel-guzzle-concurrent-request-c16d7952669a" target="_blank" rel="noreferrer" class="rounded-lg bg-canvas border border-hairline p-6 transition-colors hover:border-border-light reveal reveal-up" style="--reveal-delay: 300ms">
               <div class="flex items-start gap-4">
-                <img src="https://miro.medium.com/v2/resize:fit:640/format:webp/0*Z9vww430M8NUjxcg" alt="Improving API Performance in Laravel" class="h-20 w-20 rounded-xl object-cover" />
+                <img src="https://miro.medium.com/v2/resize:fit:640/format:webp/0*Z9vww430M8NUjxcg" alt="Improving API Performance in Laravel" loading="lazy" class="h-20 w-20 rounded object-cover" />
                 <div>
-                  <h3 class="text-xl font-semibold">Improving API Performance in Laravel</h3>
-                  <p class="mt-3 text-sm text-soft">Using Guzzle concurrent request patterns to reduce latency across service calls.</p>
+                  <h3 class="mt-2 text-xl font-normal font-display">Improving API Performance in Laravel</h3>
+                  <p class="mt-2 text-sm text-body-muted leading-relaxed">Using Guzzle concurrent request patterns to reduce latency across service calls.</p>
                 </div>
               </div>
             </a>
-            <a href="https://ohansyah.medium.com/handling-race-conditions-in-laravel-pessimistic-locking-d88086433154" target="_blank" rel="noreferrer" class="card-gradient rounded-3xl border border-white/10 p-6 transition hover:border-white/30 reveal reveal-right" style="--reveal-delay: 400ms">
+            <a href="https://ohansyah.medium.com/handling-race-conditions-in-laravel-pessimistic-locking-d88086433154" target="_blank" rel="noreferrer" class="rounded-lg bg-canvas border border-hairline p-6 transition-colors hover:border-border-light reveal reveal-up" style="--reveal-delay: 400ms">
               <div class="flex items-start gap-4">
-                <img src="https://miro.medium.com/v2/resize:fit:720/format:webp/1*rn7byubNOzRh1OFli0gqgw.jpeg" alt="Handling Race Conditions in Laravel" class="h-20 w-20 rounded-xl object-cover" />
+                <img src="https://miro.medium.com/v2/resize:fit:720/format:webp/1*rn7byubNOzRh1OFli0gqgw.jpeg" alt="Handling Race Conditions in Laravel" loading="lazy" class="h-20 w-20 rounded object-cover" />
                 <div>
-                  <h3 class="text-xl font-semibold">Handling Race Conditions in Laravel</h3>
-                  <p class="mt-3 text-sm text-soft">Applying pessimistic locking to protect transactional consistency in production.</p>
+                  <h3 class="mt-2 text-xl font-normal font-display">Handling Race Conditions in Laravel</h3>
+                  <p class="mt-2 text-sm text-body-muted leading-relaxed">Applying pessimistic locking to protect transactional consistency in production.</p>
                 </div>
               </div>
             </a>
@@ -364,82 +430,89 @@
         </div>
       </section>
 
-      <section id="build" class="border-b border-white/10 py-20">
+      <section id="build" class="py-20">
         <div class="mx-auto max-w-content px-6">
-          <h2 class="text-center text-3xl font-semibold md:text-5xl reveal reveal-up">How We Build Together</h2>
-          <ol class="mx-auto mt-12 max-w-4xl space-y-4">
-            <li>
-              <article class="w-full rounded-2xl border border-white/10 bg-panel2 p-5 reveal reveal-up" style="--reveal-delay: 100ms">
-                <h3 class="text-lg font-semibold"><span class="mr-2 text-soft">1</span>Initial Consultation</h3>
-                <p class="mt-3 text-soft">Understand your goals, constraints, and timeline.</p>
-              </article>
+          <h2 class="text-center text-3xl font-normal md:text-5xl leading-tight tracking-[-0.01em] font-display reveal reveal-up">How We Build Together</h2>
+          <ol class="mx-auto mt-12 max-w-4xl">
+            <li class="border-b border-hairline py-5 reveal reveal-up" style="--reveal-delay: 100ms">
+              <div class="flex gap-5">
+                <span class="text-2xl font-medium text-muted shrink-0 w-9">01</span>
+                <div>
+                  <h3 class="text-xl font-normal font-display">Initial Consultation</h3>
+                  <p class="mt-1.5 text-body-muted leading-relaxed">Understand your goals, constraints, and timeline.</p>
+                </div>
+              </div>
             </li>
-            <li>
-              <article class="w-full rounded-2xl border border-white/10 bg-panel2 p-5 reveal reveal-up" style="--reveal-delay: 200ms">
-                <h3 class="text-lg font-semibold"><span class="mr-2 text-soft">2</span>Tailored Proposal</h3>
-                <p class="mt-3 text-soft">A focused technical plan with transparent scope.</p>
-              </article>
+            <li class="border-b border-hairline py-5 reveal reveal-up" style="--reveal-delay: 200ms">
+              <div class="flex gap-5">
+                <span class="text-2xl font-medium text-muted shrink-0 w-9">02</span>
+                <div>
+                  <h3 class="text-xl font-normal font-display">Tailored Proposal</h3>
+                  <p class="mt-1.5 text-body-muted leading-relaxed">A focused technical plan with transparent scope.</p>
+                </div>
+              </div>
             </li>
-            <li>
-              <article class="w-full rounded-2xl border border-white/10 bg-panel2 p-5 reveal reveal-up" style="--reveal-delay: 300ms">
-                <h3 class="text-lg font-semibold"><span class="mr-2 text-soft">3</span>Project Kickoff</h3>
-                <p class="mt-3 text-soft">Milestones, delivery rhythm, and communication channel setup.</p>
-              </article>
+            <li class="border-b border-hairline py-5 reveal reveal-up" style="--reveal-delay: 300ms">
+              <div class="flex gap-5">
+                <span class="text-2xl font-medium text-muted shrink-0 w-9">03</span>
+                <div>
+                  <h3 class="text-xl font-normal font-display">Project Kickoff</h3>
+                  <p class="mt-1.5 text-body-muted leading-relaxed">Milestones, delivery rhythm, and communication channel setup.</p>
+                </div>
+              </div>
             </li>
-            <li>
-              <article class="w-full rounded-2xl border border-white/10 bg-panel2 p-5 reveal reveal-up" style="--reveal-delay: 400ms">
-                <h3 class="text-lg font-semibold"><span class="mr-2 text-soft">4</span>Development</h3>
-                <p class="mt-3 text-soft">Implementation with regular updates and iterative feedback.</p>
-              </article>
+            <li class="border-b border-hairline py-5 reveal reveal-up" style="--reveal-delay: 400ms">
+              <div class="flex gap-5">
+                <span class="text-2xl font-medium text-muted shrink-0 w-9">04</span>
+                <div>
+                  <h3 class="text-xl font-normal font-display">Development</h3>
+                  <p class="mt-1.5 text-body-muted leading-relaxed">Implementation with regular updates and iterative feedback.</p>
+                </div>
+              </div>
             </li>
-            <li>
-              <article class="w-full rounded-2xl border border-white/10 bg-panel2 p-5 reveal reveal-up" style="--reveal-delay: 500ms">
-                <h3 class="text-lg font-semibold"><span class="mr-2 text-soft">5</span>QA & Review</h3>
-                <p class="mt-3 text-soft">Testing, validation, and refinements before release.</p>
-              </article>
+            <li class="border-b border-hairline py-5 reveal reveal-up" style="--reveal-delay: 500ms">
+              <div class="flex gap-5">
+                <span class="text-2xl font-medium text-muted shrink-0 w-9">05</span>
+                <div>
+                  <h3 class="text-xl font-normal font-display">QA & Review</h3>
+                  <p class="mt-1.5 text-body-muted leading-relaxed">Testing, validation, and refinements before release.</p>
+                </div>
+              </div>
             </li>
-            <li>
-              <article class="w-full rounded-2xl border border-white/10 bg-panel2 p-5 reveal reveal-up" style="--reveal-delay: 600ms">
-                <h3 class="text-lg font-semibold"><span class="mr-2 text-soft">6</span>Launch & Support</h3>
-                <p class="mt-3 text-soft">Go-live support and practical post-launch improvements.</p>
-              </article>
+            <li class="py-5 reveal reveal-up" style="--reveal-delay: 600ms">
+              <div class="flex gap-5">
+                <span class="text-2xl font-medium text-muted shrink-0 w-9">06</span>
+                <div>
+                  <h3 class="text-xl font-normal font-display">Launch & Support</h3>
+                  <p class="mt-1.5 text-body-muted leading-relaxed">Go-live support and practical post-launch improvements.</p>
+                </div>
+              </div>
             </li>
           </ol>
         </div>
       </section>
 
-      <section id="contact" class="py-24">
+      <section id="contact" class="bg-soft-stone py-24">
         <div class="mx-auto max-w-content px-6">
-          <div class="p-10 text-center reveal reveal-up">
-            <h2 class="text-3xl font-semibold md:text-5xl">Ready to Build?</h2>
-            <p class="mx-auto mt-4 max-w-2xl text-soft">
-              Let’s turn your ideas into reliable software with clean architecture and strong delivery.
+          <div class="mx-auto max-w-xl text-center reveal reveal-up">
+            <h2 class="text-3xl font-normal md:text-5xl leading-tight tracking-[-0.01em] font-display">Ready to Build?</h2>
+            <p class="mx-auto mt-4 text-body-muted leading-relaxed">
+              Let's turn your ideas into reliable software with clean architecture and strong delivery.
             </p>
-            <div class="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-              <a href="https://www.linkedin.com/in/ohansyah/" target="_blank" rel="noreferrer" class="rounded-full bg-white px-6 py-3 text-sm font-semibold text-black transition hover:bg-zinc-200">
+            <div class="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
+              <a href="https://www.linkedin.com/in/ohansyah/" target="_blank" rel="noreferrer" class="rounded-full bg-primary px-7 py-3 text-sm font-medium text-on-primary transition-opacity hover:opacity-90">
                 LinkedIn
               </a>
-              <a href="https://github.com/ohansyah" target="_blank" rel="noreferrer" class="rounded-full border border-white/20 px-6 py-3 text-sm font-semibold transition hover:border-white/40">
+              <a href="https://github.com/ohansyah" target="_blank" rel="noreferrer" class="inline-flex items-center gap-1.5 text-sm text-ink border-b border-ink/30 transition-colors hover:border-action-blue hover:text-action-blue py-3">
                 GitHub
               </a>
             </div>
-            <p class="mt-3 text-sm text-soft">Open to freelance projects and long-term collaboration</p>
+            <p class="mt-4 text-sm text-muted">Open to freelance projects and long-term collaboration</p>
           </div>
         </div>
       </section>
     </main>
 
-    <footer class="border-t border-white/10 py-10">
-      <div class="mx-auto flex max-w-content flex-col items-center justify-between gap-5 px-6 text-sm text-soft md:flex-row">
-        <p>© Ohansyah 2026. All rights reserved.</p>
-        <div class="flex items-center gap-5">
-          <a href="#services" class="hover:text-white">Services</a>
-          <a href="#projects" class="hover:text-white">Projects</a>
-          <a href="#stories" class="hover:text-white">Stories</a>
-          <a href="#contact" class="hover:text-white">Contact</a>
-        </div>
-      </div>
-    </footer>
     <script>
       const revealElements = document.querySelectorAll('.reveal');
       const revealObserver = new IntersectionObserver(
@@ -452,12 +525,32 @@
           });
         },
         {
-          threshold: 0.12,
-          rootMargin: '0px 0px -8% 0px',
+          threshold: 0.1,
+          rootMargin: '0px 0px -5% 0px',
         }
       );
-
       revealElements.forEach((element) => revealObserver.observe(element));
+
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('[data-nav-link]');
+      if (sections.length && navLinks.length) {
+        const updateActive = () => {
+          const scrollCenter = window.scrollY + window.innerHeight * 0.35;
+          let current = sections[0].id;
+          sections.forEach((section) => {
+            const top = section.offsetTop;
+            const bottom = top + section.offsetHeight;
+            if (scrollCenter >= top && scrollCenter < bottom) {
+              current = section.id;
+            }
+          });
+          navLinks.forEach((link) =>
+            link.classList.toggle('active', link.getAttribute('href') === '#' + current)
+          );
+        };
+        window.addEventListener('scroll', () => requestAnimationFrame(updateActive), { passive: true });
+        updateActive();
+      }
     </script>
   </body>
 </html>
