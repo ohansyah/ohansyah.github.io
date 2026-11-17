@@ -118,15 +118,18 @@
         opacity: 1;
         transform: translateY(0);
       }
-      .js .dk-track { height: calc(100vh * var(--n, 1)); }
+      .deal > section[id] { position: sticky; }
+      .deal > section[id]:not(#home) { box-shadow: 0 -12px 28px -14px rgba(10,12,20,.28); }
+      .deal > section[id]:not(:last-child) { margin-bottom: 40vh; }
+      .deal > #home { background: #fff; }
+      .js .dk-track { height: calc(140vh * var(--n, 1)); }
       .js .dk-stage { position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; overflow: hidden; padding: 28px 0 96px; perspective: 1800px; }
       .js .dk-deck { position: relative; flex: 1; min-height: 0; display: grid; place-items: center; padding: 0 24px; }
       .js .dk-card { grid-area: 1 / 1; width: min(100%, calc(66vh * 16 / 9), 1200px); transform-origin: 50% 25%; will-change: transform, filter; position: relative; }
-      .dk-frame { position: relative; overflow: hidden; border-radius: 24px; background: #eeece7; box-shadow: 0 50px 90px -35px rgba(10,12,20,.5); }
+      .dk-frame { position: relative; overflow: hidden; border-radius: 24px; background: #eeece7; box-shadow: 0 12px 28px -14px rgba(10,12,20,.28); }
       .dk-frame.dk-kpj { background: #f1e8dc; }
       .dk-img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: top; max-width: none; height: auto; }
       .dk-img.dk-contain { object-fit: contain; object-position: center; }
-      .dk-shade { position: absolute; inset: 0; border-radius: 24px; background: #0a0c14; opacity: 0; pointer-events: none; }
       .dk-cut { position: absolute; right: 0; bottom: 0; z-index: 10; }
       .dk-corner { position: absolute; width: 18px; height: 18px; background: radial-gradient(circle at 0 0, transparent 17.5px, #eeece7 18px); }
       .dk-c1 { right: 0; bottom: 100%; }
@@ -150,8 +153,7 @@
         .js .dk-stage { position: static; height: auto; overflow: visible; padding: 56px 0 24px; }
         .js .dk-deck { display: block; padding: 0 16px; }
         .js .dk-card { width: 100%; margin-bottom: 24px; transform: none !important; filter: none !important; opacity: 1 !important; }
-        .dk-shade { display: none; }
-        .dk-img { aspect-ratio: 4 / 5; }
+          .dk-img { aspect-ratio: 4 / 5; }
         .dk-vt b { font-size: 15px; } .dk-arrow { width: 44px; height: 44px; }
       }
       @media (prefers-reduced-motion: reduce) {
@@ -286,31 +288,24 @@
             <div class="dk-deck">
               <article class="dk-card" aria-label="eDot eShop">
                 <div class="dk-frame"><img src="./img/edot/merge.webp" alt="eDot eShop" width="3736" height="2215" class="dk-img" /><div class="dk-cut"><span class="dk-corner dk-c1"></span><span class="dk-corner dk-c2"></span><button type="button" class="dk-visit" data-dk-open="0" aria-haspopup="dialog" aria-label="View details of eDot eShop"><span class="dk-vt"><b>eDot eShop</b><span>View details</span></span><span class="dk-arrow" style="background:#1863dc"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></span></button></div>
-                <div class="dk-shade"></div>
               </article>
               <article class="dk-card" aria-label="SRC: MyAYO & AYO Kasir">
                 <div class="dk-frame"><img src="./img/ayo/project-myayo-ayokasir.webp" alt="SRC MyAYO & AYO Kasir" width="2421" height="1440" class="dk-img" /><div class="dk-cut"><span class="dk-corner dk-c1"></span><span class="dk-corner dk-c2"></span><button type="button" class="dk-visit" data-dk-open="1" aria-haspopup="dialog" aria-label="View details of SRC: MyAYO & AYO Kasir"><span class="dk-vt"><b>SRC: MyAYO & AYO Kasir</b><span>View details</span></span><span class="dk-arrow" style="background:#c8102e"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></span></button></div>
-                <div class="dk-shade"></div>
               </article>
               <article class="dk-card" aria-label="Online Store (Open Source)">
                 <div class="dk-frame"><img src="./img/online-store/app-collection.webp" alt="Online Store OSS" width="1518" height="1033" class="dk-img" /><div class="dk-cut"><span class="dk-corner dk-c1"></span><span class="dk-corner dk-c2"></span><button type="button" class="dk-visit" data-dk-open="2" aria-haspopup="dialog" aria-label="View details of Online Store (Open Source)"><span class="dk-vt"><b>Online Store (Open Source)</b><span>View details</span></span><span class="dk-arrow" style="background:#d98e04"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></span></button></div>
-                <div class="dk-shade"></div>
               </article>
               <article class="dk-card" aria-label="Cashier Simple POS (Open Source)">
                 <div class="dk-frame"><img src="./img/simple-pos/cashier.png" alt="Cashier Simple POS" width="1241" height="894" class="dk-img" /><div class="dk-cut"><span class="dk-corner dk-c1"></span><span class="dk-corner dk-c2"></span><button type="button" class="dk-visit" data-dk-open="3" aria-haspopup="dialog" aria-label="View details of Cashier Simple POS (Open Source)"><span class="dk-vt"><b>Cashier Simple POS (Open Source)</b><span>View details</span></span><span class="dk-arrow" style="background:#2f855a"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></span></button></div>
-                <div class="dk-shade"></div>
               </article>
               <article class="dk-card" aria-label="Isykarima Community Library">
                 <div class="dk-frame"><img src="./img/isykarima/merge.webp" alt="Isykarima Community Library: public site, book catalog, blog, and Filament admin" width="3960" height="2004" class="dk-img" /><div class="dk-cut"><span class="dk-corner dk-c1"></span><span class="dk-corner dk-c2"></span><button type="button" class="dk-visit" data-dk-open="4" aria-haspopup="dialog" aria-label="View details of Isykarima Community Library"><span class="dk-vt"><b>Isykarima Community Library</b><span>View details</span></span><span class="dk-arrow" style="background:#1d6b45"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></span></button></div>
-                <div class="dk-shade"></div>
               </article>
               <article class="dk-card" aria-label="Sajian — Mini Resto POS & Online Ordering">
                 <div class="dk-frame"><img src="./img/sajian/admin-pos.webp" alt="Sajian Mini Resto POS" width="1920" height="1080" class="dk-img" /><div class="dk-cut"><span class="dk-corner dk-c1"></span><span class="dk-corner dk-c2"></span><button type="button" class="dk-visit" data-dk-open="5" aria-haspopup="dialog" aria-label="View details of Sajian — Mini Resto POS & Online Ordering"><span class="dk-vt"><b>Sajian — Mini Resto POS & Online Ordering</b><span>View details</span></span><span class="dk-arrow" style="background:#c2410c"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></span></button></div>
-                <div class="dk-shade"></div>
               </article>
               <article class="dk-card" aria-label="KPJ Official Merchandise Store">
                 <div class="dk-frame dk-kpj"><img src="./img/kpj/merge.webp" alt="KPJ Official Merchandise Store: mobile catalog, order payment, and order progress timeline" width="1832" height="2360" class="dk-img dk-contain" /><div class="dk-cut"><span class="dk-corner dk-c1"></span><span class="dk-corner dk-c2"></span><button type="button" class="dk-visit" data-dk-open="6" aria-haspopup="dialog" aria-label="View details of KPJ Official Merchandise Store"><span class="dk-vt"><b>KPJ Official Merchandise Store</b><span>View details</span></span><span class="dk-arrow" style="background:#17171c"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></span></button></div>
-                <div class="dk-shade"></div>
               </article>
             </div>
           </div>
@@ -379,7 +374,7 @@
         </div>
       </section>
 
-      <section id="build" class="py-20">
+      <section id="build" class="bg-canvas py-20">
         <div class="mx-auto max-w-content px-6">
           <h2 class="text-center text-3xl font-normal md:text-5xl leading-tight tracking-[-0.01em] font-display reveal reveal-up">How We Build Together</h2>
           <ol class="mx-auto mt-12 max-w-4xl">
@@ -556,7 +551,6 @@ const dkData = [{"title": "eDot eShop", "url": "https://edot.id/en", "body": "<p
         const track = document.querySelector('[data-dk]');
         if (!track) return;
         const cards = [...track.querySelectorAll('.dk-card')];
-        const shades = cards.map((c) => c.querySelector('.dk-shade'));
         const n = cards.length;
         track.style.setProperty('--n', n);
         const desktop = matchMedia('(min-width: 768px)');
@@ -564,7 +558,7 @@ const dkData = [{"title": "eDot eShop", "url": "https://edot.id/en", "body": "<p
         const clamp01 = (v) => Math.min(1, Math.max(0, v));
         const easeOut = (t) => 1 - (1 - t) ** 3;
         const span = Math.max(1, n - 1);
-        const arrived = (j, v) => (j <= 0 ? 1 : easeOut(clamp01((v * span - (j - 1)) / 0.72)));
+        const arrived = (j, v) => (j <= 0 ? 1 : easeOut(clamp01((v * span - (j - 1)) / 0.5)));
         let cur = 0, target = 0, raf = 0;
         const paint = (v) => {
           if (!desktop.matches) { cards.forEach((c) => { c.style.transform = ''; c.style.filter = ''; c.style.opacity = ''; }); return; }
@@ -576,11 +570,9 @@ const dkData = [{"title": "eDot eShop", "url": "https://edot.id/en", "body": "<p
             if (reduced.matches) {
               c.style.transform = 'none'; c.style.filter = 'none';
               c.style.opacity = a >= 0.5 ? 1 : 0; c.style.visibility = a >= 0.5 ? 'visible' : 'hidden';
-              shades[i].style.opacity = 0; return;
+              return;
             }
             c.style.transform = `translate3d(0,${(1 - a) * 108 - above * 5}vh,0) rotateX(${-(1 - a) * 30 + above * 5}deg) scale(${0.9 + 0.1 * a - above * 0.05})`;
-            c.style.filter = `blur(${((1 - a) ** 2 * 12 + above * 1.1).toFixed(2)}px)`;
-            shades[i].style.opacity = above * 0.15;
           });
         };
         const readTarget = () => {
@@ -598,6 +590,19 @@ const dkData = [{"title": "eDot eShop", "url": "https://edot.id/en", "body": "<p
         addEventListener('resize', onScroll);
         desktop.addEventListener('change', onScroll);
         readTarget(); cur = target; paint(cur);
+      })();
+
+      // Section stack: each section is pinned and the next one slides over it
+      (() => {
+        const secs = [...main.querySelectorAll(':scope > section[id]')];
+        if (secs.length < 2 || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        main.classList.add('deal');
+        const setTops = () => secs.forEach((s) => { s.style.top = Math.min(0, main.clientHeight - s.offsetHeight) + 'px'; });
+        addEventListener('resize', setTops);
+        addEventListener('load', setTops);
+        new ResizeObserver(setTops).observe(main);
+        secs.forEach((s) => new ResizeObserver(setTops).observe(s));
+        setTops();
       })();
     </script>
   </body>
