@@ -118,6 +118,42 @@
         opacity: 1;
         transform: translateY(0);
       }
+      .js .dk-track { height: calc(100vh * var(--n, 1)); }
+      .js .dk-stage { position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; overflow: hidden; padding: 28px 0 96px; perspective: 1800px; }
+      .js .dk-deck { position: relative; flex: 1; min-height: 0; display: grid; place-items: center; padding: 0 24px; }
+      .js .dk-card { grid-area: 1 / 1; width: min(100%, calc(66vh * 16 / 9), 1200px); transform-origin: 50% 25%; will-change: transform, filter; position: relative; }
+      .dk-frame { position: relative; overflow: hidden; border-radius: 24px; background: #eeece7; box-shadow: 0 50px 90px -35px rgba(10,12,20,.5); }
+      .dk-frame.dk-kpj { background: #f1e8dc; }
+      .dk-img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: top; max-width: none; height: auto; }
+      .dk-img.dk-contain { object-fit: contain; object-position: center; }
+      .dk-shade { position: absolute; inset: 0; border-radius: 24px; background: #0a0c14; opacity: 0; pointer-events: none; }
+      .dk-cut { position: absolute; right: 0; bottom: 0; z-index: 10; }
+      .dk-corner { position: absolute; width: 18px; height: 18px; background: radial-gradient(circle at 0 0, transparent 17.5px, #eeece7 18px); }
+      .dk-c1 { right: 0; bottom: 100%; }
+      .dk-c2 { right: 100%; bottom: 0; }
+      .dk-visit { position: absolute; right: 0; bottom: 0; z-index: 11; display: flex; align-items: center; gap: 18px; padding: 14px 4px 14px 26px; background: #eeece7; border-top-left-radius: 20px; color: #111318; text-decoration: none; white-space: nowrap; }
+      .dk-vt { display: flex; flex-direction: column; line-height: 1.15; }
+      .dk-vt b { font: 600 18px/1.15 'Space Grotesk', sans-serif; letter-spacing: -.015em; }
+      .dk-vt span { font-size: 14px; color: #3b3f48; }
+      .dk-arrow { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 9999px; color: #fff; transition: transform .2s ease-out; }
+      button.dk-visit { border: 0; cursor: pointer; font: inherit; text-align: left; }
+      .dk-visit:hover .dk-arrow { transform: rotate(90deg); }
+      .dk-modal { border: 0; padding: 0; background: transparent; max-width: min(640px, calc(100vw - 32px)); width: 100%; max-height: calc(100vh - 48px); overflow: visible; }
+      .dk-modal::backdrop { background: rgba(10,12,20,.55); backdrop-filter: blur(4px); }
+      .dk-modal[open] { animation: dk-in .22s ease-out; }
+      @keyframes dk-in { from { opacity: 0; transform: translateY(12px) scale(.98); } to { opacity: 1; transform: none; } }
+      .dk-m-box { position: relative; background: #fff; border-radius: 24px; padding: 32px; max-height: calc(100vh - 48px); overflow-y: auto; box-shadow: 0 40px 80px -30px rgba(10,12,20,.6); }
+      .dk-m-close { position: absolute; top: 14px; right: 16px; width: 36px; height: 36px; border-radius: 9999px; font-size: 24px; line-height: 1; color: #17171c; background: #eeece7; }
+      @media (prefers-reduced-motion: reduce) { .dk-modal[open] { animation: none; } }
+      @media (max-width: 767px) {
+        .js .dk-track { height: auto; }
+        .js .dk-stage { position: static; height: auto; overflow: visible; padding: 56px 0 24px; }
+        .js .dk-deck { display: block; padding: 0 16px; }
+        .js .dk-card { width: 100%; margin-bottom: 24px; transform: none !important; filter: none !important; opacity: 1 !important; }
+        .dk-shade { display: none; }
+        .dk-img { aspect-ratio: 4 / 5; }
+        .dk-vt b { font-size: 15px; } .dk-arrow { width: 44px; height: 44px; }
+      }
       @media (prefers-reduced-motion: reduce) {
         .js .reveal {
           opacity: 1;
@@ -240,178 +276,43 @@
         </div>
       </section>
 
-      <section id="projects" class="py-20">
-        <div class="mx-auto max-w-content px-6">
-          <div class="mx-auto max-w-3xl text-center reveal reveal-up">
-            <p class="text-xs uppercase tracking-[0.16em] text-muted">Projects</p>
-            <h2 class="mt-4 text-3xl font-normal md:text-5xl leading-tight tracking-[-0.01em] font-display">Showcasing Excellence and Innovation</h2>
-          </div>
-
-          <div class="mt-12 space-y-20">
-            <article class="reveal reveal-up">
-              <div class="grid items-center gap-8 md:grid-cols-2 md:gap-12">
-                <div>
-                  <img src="./img/edot/merge.webp" alt="eDot eShop" width="3736" height="2215" loading="lazy" class="w-full rounded-[22px]" />
-                </div>
-                <div>
-                  <p class="text-xs uppercase tracking-[0.16em] text-muted">Project 01</p>
-                  <h3 class="mt-3 text-2xl font-normal md:text-3xl leading-tight tracking-[-0.01em] font-display">eDot eShop</h3>
-                  <p class="mt-4 text-base text-body-muted leading-relaxed">eDOT/eSHOP is a B2B2C e-commerce application designed to streamline and enhance the FMCG activities between distributors and their network of outlets, extending all the way to end customers.</p>
-                  <ul class="mt-4 space-y-2 text-sm text-body-muted leading-relaxed">
-                    <li><span class="font-medium text-ink">Scalable Order Processing System</span><br />Built a robust system for managing orders, invoicing, and payments with high scalability.</li>
-                    <li><span class="font-medium text-ink">Secure API Integration</span><br />Integrated payment gateways and logistics services with secure, efficient API endpoints.</li>
-                    <li><span class="font-medium text-ink">Elasticsearch-Powered Search Functionality</span><br />Integrated Elasticsearch to enable lightning-fast, full-text search capabilities across product catalogs, improving user experience with accurate and quick search results.</li>
-                  </ul>
-                  <div class="mt-6 flex flex-wrap gap-3">
-                    <a href="https://edot.id/en" class="inline-flex rounded-full border border-primary/20 px-5 py-2 text-sm font-medium text-primary transition-colors hover:border-primary/50">Project Page</a>
-                  </div>
-                </div>
-              </div>
-            </article>
-
-            <article class="reveal reveal-up" style="--reveal-delay: 70ms">
-              <div class="grid items-center gap-8 md:grid-cols-2 md:gap-12">
-                <div class="md:order-2">
-                  <img src="./img/ayo/project-myayo-ayokasir.webp" alt="SRC MyAYO & AYO Kasir" width="2421" height="1440" loading="lazy" class="w-full rounded-[22px]" />
-                </div>
-                <div class="md:order-1">
-                  <p class="text-xs uppercase tracking-[0.16em] text-muted">Project 02</p>
-                  <h3 class="mt-3 text-2xl font-normal md:text-3xl leading-tight tracking-[-0.01em] font-display">SRC: MyAYO & AYO Kasir</h3>
-                  <p class="mt-4 text-base text-body-muted leading-relaxed">AYO Kasir is a comprehensive digital ecosystem connecting wholesale partners, convenience stores, and customers. I contributed as a backend engineer to modernize store operations and build reliable services for both seller and customer workflows.</p>
-                  <ul class="mt-4 space-y-2 text-sm text-body-muted leading-relaxed">
-                    <li><span class="font-medium text-ink">Advanced Point-of-Sale (POS) System</span><br />Built core backend services for efficient in-store transactions, inventory tracking, and sales reporting.</li>
-                    <li><span class="font-medium text-ink">Secure & Scalable Infrastructure</span><br />Built and maintained high-concurrency POS APIs for peak transactions, and integrated payment and delivery providers through robust RESTful endpoints.</li>
-                    <li><span class="font-medium text-ink">Inventory & Downline Management</span><br />Developed multi-tier stock transfer flows and owner/store stock-switch logic with real-time supervisory inventory visibility.</li>
-                    <li><span class="font-medium text-ink">Digital Store Operations</span><br />Digitized manual daily closing and built historical tracking for stock and payment discrepancies at national scale.</li>
-                    <li><span class="font-medium text-ink">Automated Replenishment</span><br />Developed order recommendation and approval workflow logic to automate inventory requests and improve stock availability.</li>
-                  </ul>
-                  <div class="mt-6 flex flex-wrap gap-3">
-                    <a href="https://play.google.com/store/apps/details?id=com.pmi.limited.PMIAPPM05983&pcampaignid=web_share" class="inline-flex rounded-full border border-primary/20 px-5 py-2 text-sm font-medium text-primary transition-colors hover:border-primary/50">Project Page</a>
-                  </div>
-                </div>
-              </div>
-            </article>
-
-            <article class="reveal reveal-up" style="--reveal-delay: 120ms">
-              <div class="grid items-center gap-8 md:grid-cols-2 md:gap-12">
-                <div>
-                  <img src="./img/online-store/app-collection.webp" alt="Online Store OSS" width="1518" height="1033" loading="lazy" class="w-full rounded-[22px]" />
-                </div>
-                <div>
-                  <p class="text-xs uppercase tracking-[0.16em] text-muted">Project 03</p>
-                  <h3 class="mt-3 text-2xl font-normal md:text-3xl leading-tight tracking-[-0.01em] font-display">Online Store (Open Source)</h3>
-                  <p class="mt-4 text-base text-body-muted leading-relaxed">Lightweight online storefront built with the modern TALL stack (TailwindCSS, Alpine.js, Laravel, and Livewire) to deliver an elegant, responsive shopping experience with a user-friendly admin CMS. I contributed on the backend side to build reliable catalog, content, and inventory workflows for both customer and admin operations.</p>
-                  <div class="mt-4 space-y-3 text-sm text-body-muted leading-relaxed">
-                    <div>
-                      <p><span class="font-medium text-ink">End User Experience</span></p>
-                      <ul class="mt-2 space-y-1">
-                        <li>Intuitive product search with category filters.</li>
-                        <li>Engaging banner slider for promotions.</li>
-                        <li>Dynamic product displays for popular and discounted items.</li>
-                        <li>Organized category and product listing.</li>
-                      </ul>
-                    </div>
-                    <div>
-                      <p><span class="font-medium text-ink">Admin CMS Capabilities</span></p>
-                      <ul class="mt-2 space-y-1">
-                        <li>Dashboard with real-time overview of banners, products, categories, and sections.</li>
-                        <li>Fully manageable product catalog and customizable product sections.</li>
-                        <li>Category management for organized browsing.</li>
-                        <li>Banner control with dynamic carousel updates.</li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="mt-6 flex flex-wrap gap-3">
-                    <a href="https://github.com/ohansyah/online-store" class="inline-flex rounded-full border border-primary/20 px-5 py-2 text-sm font-medium text-primary transition-colors hover:border-primary/50">Project Page</a>
-                  </div>
-                </div>
-              </div>
-            </article>
-
-            <article class="reveal reveal-up" style="--reveal-delay: 170ms">
-              <div class="grid items-center gap-8 md:grid-cols-2 md:gap-12">
-                <div class="md:order-2">
-                  <img src="./img/simple-pos/cashier.png" alt="Cashier Simple POS" width="1241" height="894" loading="lazy" class="w-full rounded-[22px]" />
-                </div>
-                <div class="md:order-1">
-                  <p class="text-xs uppercase tracking-[0.16em] text-muted">Project 04</p>
-                  <h3 class="mt-3 text-2xl font-normal md:text-3xl leading-tight tracking-[-0.01em] font-display">Cashier Simple POS (Open Source)</h3>
-                  <p class="mt-4 text-base text-body-muted leading-relaxed">Web-based POS system built with Laravel TALL stack and Jetstream, designed for simple but powerful order and product management with multiuser support in a single store.</p>
-                  <ul class="mt-4 space-y-2 text-sm text-body-muted leading-relaxed">
-                    <li><span class="font-medium text-ink">Transactional Backend</span><br />Implemented checkout, order summary, detailed order lifecycle, and receipt generation (print/PDF/image).</li>
-                    <li><span class="font-medium text-ink">Store Management Modules</span><br />Built master product/category services and dashboard metrics for operational visibility.</li>
-                    <li><span class="font-medium text-ink">Analytics & Multiuser Support</span><br />Added order charts and role-based multiuser flows to support daily store operations.</li>
-                  </ul>
-                  <div class="mt-6 flex flex-wrap gap-3">
-                    <a href="https://github.com/ohansyah/cashier" class="inline-flex rounded-full border border-primary/20 px-5 py-2 text-sm font-medium text-primary transition-colors hover:border-primary/50">Project Page</a>
-                  </div>
-                </div>
-              </div>
-            </article>
-
-            <article class="reveal reveal-up" style="--reveal-delay: 320ms">
-              <div class="grid items-center gap-8 md:grid-cols-2 md:gap-12">
-                <div>
-                  <img src="./img/isykarima/merge.webp" alt="Isykarima Community Library: public site, book catalog, blog, and Filament admin" width="3960" height="2004" loading="lazy" class="w-full rounded-[22px]" />
-                </div>
-                <div>
-                  <p class="text-xs uppercase tracking-[0.16em] text-muted">Project 05</p>
-                  <h3 class="mt-3 text-2xl font-normal md:text-3xl leading-tight tracking-[-0.01em] font-display">Isykarima Community Library</h3>
-                  <p class="mt-4 text-base text-body-muted leading-relaxed">Digital hub for KB-TBM Isykarima Banjaragung, a community library (Taman Bacaan Masyarakat). Combines a public site with a Filament admin panel so volunteers can run the library's content without touching code.</p>
-                  <ul class="mt-4 space-y-2 text-sm text-body-muted leading-relaxed">
-                    <li><span class="font-medium text-ink">Book &amp; Literasi Catalogs</span><br />Searchable, filterable catalogs with featured carousels, stock and status tracking, and publish scheduling.</li>
-                    <li><span class="font-medium text-ink">Donations with Proof Upload</span><br />Rate-limited money and book donation flow with proof-of-payment upload and a pending/confirmed review queue.</li>
-                    <li><span class="font-medium text-ink">Filament v5 CMS &amp; Analytics</span><br />Admin CRUD for posts, books, volunteers and pages, plus a dashboard with donation charts and a contact inbox.</li>
-                  </ul>
-                  <div class="mt-6 flex flex-wrap gap-3">
-                    <a href="https://isykarima.id/" class="inline-flex rounded-full border border-primary/20 px-5 py-2 text-sm font-medium text-primary transition-colors hover:border-primary/50">Project Page</a>
-                  </div>
-                </div>
-              </div>
-            </article>
-
-            <article class="reveal reveal-up" style="--reveal-delay: 370ms">
-              <div class="grid items-center gap-8 md:grid-cols-2 md:gap-12">
-                <div class="md:order-2">
-                  <img src="./img/sajian/admin-pos.webp" alt="Sajian Mini Resto POS" width="1920" height="1080" loading="lazy" class="w-full rounded-[22px]" />
-                </div>
-                <div class="md:order-1">
-                  <p class="text-xs uppercase tracking-[0.16em] text-muted">Project 06</p>
-                  <h3 class="mt-3 text-2xl font-normal md:text-3xl leading-tight tracking-[-0.01em] font-display">Sajian — Mini Resto POS & Online Ordering</h3>
-                  <p class="mt-4 text-base text-body-muted leading-relaxed">Mini restaurant POS and online ordering system for small, owner-operated restaurants in Indonesia ("sajian" means "serving"). Combines an onsite cashier POS with a public kiosk-style self-ordering menu, covering menu management, order processing, transaction history, and revenue reports.</p>
-                  <ul class="mt-4 space-y-2 text-sm text-body-muted leading-relaxed">
-                    <li><span class="font-medium text-ink">Kiosk Self-Ordering</span><br />Public touch-first menu with cart, checkout, order tracking, and WhatsApp order notifications.</li>
-                    <li><span class="font-medium text-ink">Onsite POS</span><br />Cashier interface with product search, discounts, and cash/change calculator.</li>
-                    <li><span class="font-medium text-ink">Operations Dashboard</span><br />Menu & category CRUD, live order processing, transaction history, and revenue/profit reports.</li>
-                    <li><span class="font-medium text-ink">Modern TALL Stack</span><br />Laravel 13, Livewire 4, Flux 2 UI, Tailwind CSS 4, and PostgreSQL.</li>
-                  </ul>
-                  <div class="mt-6 flex flex-wrap gap-3">
-                    <a href="https://github.com/ohansyah/sajian" class="inline-flex rounded-full border border-primary/20 px-5 py-2 text-sm font-medium text-primary transition-colors hover:border-primary/50">Project Page</a>
-                  </div>
-                </div>
-              </div>
-            </article>
-
-            <article class="reveal reveal-up" style="--reveal-delay: 420ms">
-              <div class="grid items-center gap-8 md:grid-cols-2 md:gap-12">
-                <div>
-                  <img src="./img/kpj/merge.webp" alt="KPJ Official Merchandise Store: mobile catalog, order payment, and order progress timeline" width="1832" height="2360" loading="lazy" class="w-full rounded-[22px]" />
-                </div>
-                <div>
-                  <p class="text-xs uppercase tracking-[0.16em] text-muted">Project 07</p>
-                  <h3 class="mt-3 text-2xl font-normal md:text-3xl leading-tight tracking-[-0.01em] font-display">KPJ Official Merchandise Store</h3>
-                  <p class="mt-4 text-base text-body-muted leading-relaxed">Merchandise for Komunitas Perantau Jepara sold well (about 2,500 pieces in one sale), but the money moved without a clear record and no one wanted to hold it. I built a stock-based store where every rupiah is traceable and the admin never touches the money, aimed at members who are mostly non-technical and phone-first.</p>
-                  <ul class="mt-4 space-y-2 text-sm text-body-muted leading-relaxed">
-                    <li><span class="font-medium text-ink">Payments That Can't Be Faked</span><br />An order becomes paid only from verified Midtrans data: signature check, status re-fetch, exact amount match, idempotent on gateway ref. There is no "mark as paid" button anywhere.</li>
-                    <li><span class="font-medium text-ink">No Overselling, No Lost Records</span><br />Stock is row-locked at order time and restored on expiry or cancellation. A single state machine controls every status change, and orders and payments are never hard-deleted.</li>
-                    <li><span class="font-medium text-ink">Built for Non-Technical Members</span><br />Google login, cascading province-to-village address dropdowns, an order timeline, and WhatsApp notifications. Payment, shipping and WhatsApp providers sit behind swappable drivers.</li>
-                  </ul>
-                  <div class="mt-6 flex flex-wrap gap-3">
-                    <span class="inline-flex rounded-full bg-muted/20 px-5 py-2 text-sm font-medium text-muted cursor-not-allowed" aria-disabled="true">Project Page</span>
-                  </div>
-                </div>
-              </div>
-            </article>
+      <section id="projects" class="bg-soft-stone">
+        <div class="dk-track" data-dk>
+          <div class="dk-stage">
+            <header class="relative z-10 mx-auto w-full max-w-content px-6">
+              <p class="text-xs uppercase tracking-[0.16em] text-muted">Projects</p>
+              <h2 class="mt-3 text-2xl font-normal md:text-4xl leading-tight tracking-[-0.01em] font-display">Showcasing Excellence and Innovation</h2>
+            </header>
+            <div class="dk-deck">
+              <article class="dk-card" aria-label="eDot eShop">
+                <div class="dk-frame"><img src="./img/edot/merge.webp" alt="eDot eShop" width="3736" height="2215" class="dk-img" /><div class="dk-cut"><span class="dk-corner dk-c1"></span><span class="dk-corner dk-c2"></span><button type="button" class="dk-visit" data-dk-open="0" aria-haspopup="dialog" aria-label="View details of eDot eShop"><span class="dk-vt"><b>eDot eShop</b><span>View details</span></span><span class="dk-arrow" style="background:#1863dc"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></span></button></div>
+                <div class="dk-shade"></div>
+              </article>
+              <article class="dk-card" aria-label="SRC: MyAYO & AYO Kasir">
+                <div class="dk-frame"><img src="./img/ayo/project-myayo-ayokasir.webp" alt="SRC MyAYO & AYO Kasir" width="2421" height="1440" class="dk-img" /><div class="dk-cut"><span class="dk-corner dk-c1"></span><span class="dk-corner dk-c2"></span><button type="button" class="dk-visit" data-dk-open="1" aria-haspopup="dialog" aria-label="View details of SRC: MyAYO & AYO Kasir"><span class="dk-vt"><b>SRC: MyAYO & AYO Kasir</b><span>View details</span></span><span class="dk-arrow" style="background:#c8102e"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></span></button></div>
+                <div class="dk-shade"></div>
+              </article>
+              <article class="dk-card" aria-label="Online Store (Open Source)">
+                <div class="dk-frame"><img src="./img/online-store/app-collection.webp" alt="Online Store OSS" width="1518" height="1033" class="dk-img" /><div class="dk-cut"><span class="dk-corner dk-c1"></span><span class="dk-corner dk-c2"></span><button type="button" class="dk-visit" data-dk-open="2" aria-haspopup="dialog" aria-label="View details of Online Store (Open Source)"><span class="dk-vt"><b>Online Store (Open Source)</b><span>View details</span></span><span class="dk-arrow" style="background:#d98e04"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></span></button></div>
+                <div class="dk-shade"></div>
+              </article>
+              <article class="dk-card" aria-label="Cashier Simple POS (Open Source)">
+                <div class="dk-frame"><img src="./img/simple-pos/cashier.png" alt="Cashier Simple POS" width="1241" height="894" class="dk-img" /><div class="dk-cut"><span class="dk-corner dk-c1"></span><span class="dk-corner dk-c2"></span><button type="button" class="dk-visit" data-dk-open="3" aria-haspopup="dialog" aria-label="View details of Cashier Simple POS (Open Source)"><span class="dk-vt"><b>Cashier Simple POS (Open Source)</b><span>View details</span></span><span class="dk-arrow" style="background:#2f855a"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></span></button></div>
+                <div class="dk-shade"></div>
+              </article>
+              <article class="dk-card" aria-label="Isykarima Community Library">
+                <div class="dk-frame"><img src="./img/isykarima/merge.webp" alt="Isykarima Community Library: public site, book catalog, blog, and Filament admin" width="3960" height="2004" class="dk-img" /><div class="dk-cut"><span class="dk-corner dk-c1"></span><span class="dk-corner dk-c2"></span><button type="button" class="dk-visit" data-dk-open="4" aria-haspopup="dialog" aria-label="View details of Isykarima Community Library"><span class="dk-vt"><b>Isykarima Community Library</b><span>View details</span></span><span class="dk-arrow" style="background:#1d6b45"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></span></button></div>
+                <div class="dk-shade"></div>
+              </article>
+              <article class="dk-card" aria-label="Sajian — Mini Resto POS & Online Ordering">
+                <div class="dk-frame"><img src="./img/sajian/admin-pos.webp" alt="Sajian Mini Resto POS" width="1920" height="1080" class="dk-img" /><div class="dk-cut"><span class="dk-corner dk-c1"></span><span class="dk-corner dk-c2"></span><button type="button" class="dk-visit" data-dk-open="5" aria-haspopup="dialog" aria-label="View details of Sajian — Mini Resto POS & Online Ordering"><span class="dk-vt"><b>Sajian — Mini Resto POS & Online Ordering</b><span>View details</span></span><span class="dk-arrow" style="background:#c2410c"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></span></button></div>
+                <div class="dk-shade"></div>
+              </article>
+              <article class="dk-card" aria-label="KPJ Official Merchandise Store">
+                <div class="dk-frame dk-kpj"><img src="./img/kpj/merge.webp" alt="KPJ Official Merchandise Store: mobile catalog, order payment, and order progress timeline" width="1832" height="2360" class="dk-img dk-contain" /><div class="dk-cut"><span class="dk-corner dk-c1"></span><span class="dk-corner dk-c2"></span><button type="button" class="dk-visit" data-dk-open="6" aria-haspopup="dialog" aria-label="View details of KPJ Official Merchandise Store"><span class="dk-vt"><b>KPJ Official Merchandise Store</b><span>View details</span></span><span class="dk-arrow" style="background:#17171c"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></span></button></div>
+                <div class="dk-shade"></div>
+              </article>
+            </div>
           </div>
         </div>
       </section>
@@ -561,6 +462,16 @@
       </section>
     </main>
 
+    <dialog id="dk-modal" class="dk-modal" aria-labelledby="dk-m-title">
+      <div class="dk-m-box">
+        <button type="button" class="dk-m-close" data-dk-close aria-label="Close">&times;</button>
+        <p class="text-xs uppercase tracking-[0.16em] text-muted" id="dk-m-eyebrow"></p>
+        <h3 id="dk-m-title" class="mt-3 text-2xl font-normal md:text-3xl leading-tight tracking-[-0.01em] font-display"></h3>
+        <div id="dk-m-body"></div>
+        <div id="dk-m-links" class="mt-6 flex flex-wrap gap-3"></div>
+      </div>
+    </dialog>
+
     <script>
       const revealElements = document.querySelectorAll('.reveal');
       const revealObserver = new IntersectionObserver(
@@ -612,6 +523,82 @@
           });
         });
       }
+
+const dkData = [{"title": "eDot eShop", "url": "https://edot.id/en", "body": "<p class=\"mt-4 text-base text-body-muted leading-relaxed\">eDOT/eSHOP is a B2B2C e-commerce application designed to streamline and enhance the FMCG activities between distributors and their network of outlets, extending all the way to end customers.</p> <ul class=\"mt-4 space-y-2 text-sm text-body-muted leading-relaxed\"> <li><span class=\"font-medium text-ink\">Scalable Order Processing System</span><br />Built a robust system for managing orders, invoicing, and payments with high scalability.</li> <li><span class=\"font-medium text-ink\">Secure API Integration</span><br />Integrated payment gateways and logistics services with secure, efficient API endpoints.</li> <li><span class=\"font-medium text-ink\">Elasticsearch-Powered Search Functionality</span><br />Integrated Elasticsearch to enable lightning-fast, full-text search capabilities across product catalogs, improving user experience with accurate and quick search results.</li> </ul>"}, {"title": "SRC: MyAYO & AYO Kasir", "url": "https://play.google.com/store/apps/details?id=com.pmi.limited.PMIAPPM05983&pcampaignid=web_share", "body": "<p class=\"mt-4 text-base text-body-muted leading-relaxed\">AYO Kasir is a comprehensive digital ecosystem connecting wholesale partners, convenience stores, and customers. I contributed as a backend engineer to modernize store operations and build reliable services for both seller and customer workflows.</p> <ul class=\"mt-4 space-y-2 text-sm text-body-muted leading-relaxed\"> <li><span class=\"font-medium text-ink\">Advanced Point-of-Sale (POS) System</span><br />Built core backend services for efficient in-store transactions, inventory tracking, and sales reporting.</li> <li><span class=\"font-medium text-ink\">Secure & Scalable Infrastructure</span><br />Built and maintained high-concurrency POS APIs for peak transactions, and integrated payment and delivery providers through robust RESTful endpoints.</li> <li><span class=\"font-medium text-ink\">Inventory & Downline Management</span><br />Developed multi-tier stock transfer flows and owner/store stock-switch logic with real-time supervisory inventory visibility.</li> <li><span class=\"font-medium text-ink\">Digital Store Operations</span><br />Digitized manual daily closing and built historical tracking for stock and payment discrepancies at national scale.</li> <li><span class=\"font-medium text-ink\">Automated Replenishment</span><br />Developed order recommendation and approval workflow logic to automate inventory requests and improve stock availability.</li> </ul>"}, {"title": "Online Store (Open Source)", "url": "https://github.com/ohansyah/online-store", "body": "<p class=\"mt-4 text-base text-body-muted leading-relaxed\">Lightweight online storefront built with the modern TALL stack (TailwindCSS, Alpine.js, Laravel, and Livewire) to deliver an elegant, responsive shopping experience with a user-friendly admin CMS. I contributed on the backend side to build reliable catalog, content, and inventory workflows for both customer and admin operations.</p> <div class=\"mt-4 space-y-3 text-sm text-body-muted leading-relaxed\"> <div> <p><span class=\"font-medium text-ink\">End User Experience</span></p> <ul class=\"mt-2 space-y-1\"> <li>Intuitive product search with category filters.</li> <li>Engaging banner slider for promotions.</li> <li>Dynamic product displays for popular and discounted items.</li> <li>Organized category and product listing.</li> </ul> </div> <div> <p><span class=\"font-medium text-ink\">Admin CMS Capabilities</span></p> <ul class=\"mt-2 space-y-1\"> <li>Dashboard with real-time overview of banners, products, categories, and sections.</li> <li>Fully manageable product catalog and customizable product sections.</li> <li>Category management for organized browsing.</li> <li>Banner control with dynamic carousel updates.</li> </ul> </div> </div>"}, {"title": "Cashier Simple POS (Open Source)", "url": "https://github.com/ohansyah/cashier", "body": "<p class=\"mt-4 text-base text-body-muted leading-relaxed\">Web-based POS system built with Laravel TALL stack and Jetstream, designed for simple but powerful order and product management with multiuser support in a single store.</p> <ul class=\"mt-4 space-y-2 text-sm text-body-muted leading-relaxed\"> <li><span class=\"font-medium text-ink\">Transactional Backend</span><br />Implemented checkout, order summary, detailed order lifecycle, and receipt generation (print/PDF/image).</li> <li><span class=\"font-medium text-ink\">Store Management Modules</span><br />Built master product/category services and dashboard metrics for operational visibility.</li> <li><span class=\"font-medium text-ink\">Analytics & Multiuser Support</span><br />Added order charts and role-based multiuser flows to support daily store operations.</li> </ul>"}, {"title": "Isykarima Community Library", "url": "https://isykarima.id/", "body": "<p class=\"mt-4 text-base text-body-muted leading-relaxed\">Digital hub for KB-TBM Isykarima Banjaragung, a community library (Taman Bacaan Masyarakat). Combines a public site with a Filament admin panel so volunteers can run the library's content without touching code.</p> <ul class=\"mt-4 space-y-2 text-sm text-body-muted leading-relaxed\"> <li><span class=\"font-medium text-ink\">Book &amp; Literasi Catalogs</span><br />Searchable, filterable catalogs with featured carousels, stock and status tracking, and publish scheduling.</li> <li><span class=\"font-medium text-ink\">Donations with Proof Upload</span><br />Rate-limited money and book donation flow with proof-of-payment upload and a pending/confirmed review queue.</li> <li><span class=\"font-medium text-ink\">Filament v5 CMS &amp; Analytics</span><br />Admin CRUD for posts, books, volunteers and pages, plus a dashboard with donation charts and a contact inbox.</li> </ul>"}, {"title": "Sajian — Mini Resto POS & Online Ordering", "url": "https://github.com/ohansyah/sajian", "body": "<p class=\"mt-4 text-base text-body-muted leading-relaxed\">Mini restaurant POS and online ordering system for small, owner-operated restaurants in Indonesia (\"sajian\" means \"serving\"). Combines an onsite cashier POS with a public kiosk-style self-ordering menu, covering menu management, order processing, transaction history, and revenue reports.</p> <ul class=\"mt-4 space-y-2 text-sm text-body-muted leading-relaxed\"> <li><span class=\"font-medium text-ink\">Kiosk Self-Ordering</span><br />Public touch-first menu with cart, checkout, order tracking, and WhatsApp order notifications.</li> <li><span class=\"font-medium text-ink\">Onsite POS</span><br />Cashier interface with product search, discounts, and cash/change calculator.</li> <li><span class=\"font-medium text-ink\">Operations Dashboard</span><br />Menu & category CRUD, live order processing, transaction history, and revenue/profit reports.</li> <li><span class=\"font-medium text-ink\">Modern TALL Stack</span><br />Laravel 13, Livewire 4, Flux 2 UI, Tailwind CSS 4, and PostgreSQL.</li> </ul>"}, {"title": "KPJ Official Merchandise Store", "url": null, "body": "<p class=\"mt-4 text-base text-body-muted leading-relaxed\">Merchandise for Komunitas Perantau Jepara sold well (about 2,500 pieces in one sale), but the money moved without a clear record and no one wanted to hold it. I built a stock-based store where every rupiah is traceable and the admin never touches the money, aimed at members who are mostly non-technical and phone-first.</p> <ul class=\"mt-4 space-y-2 text-sm text-body-muted leading-relaxed\"> <li><span class=\"font-medium text-ink\">Payments That Can't Be Faked</span><br />An order becomes paid only from verified Midtrans data: signature check, status re-fetch, exact amount match, idempotent on gateway ref. There is no \"mark as paid\" button anywhere.</li> <li><span class=\"font-medium text-ink\">No Overselling, No Lost Records</span><br />Stock is row-locked at order time and restored on expiry or cancellation. A single state machine controls every status change, and orders and payments are never hard-deleted.</li> <li><span class=\"font-medium text-ink\">Built for Non-Technical Members</span><br />Google login, cascading province-to-village address dropdowns, an order timeline, and WhatsApp notifications. Payment, shipping and WhatsApp providers sit behind swappable drivers.</li> </ul>"}];
+      (() => {
+        const dlg = document.getElementById('dk-modal');
+        if (!dlg) return;
+        const $ = (id) => document.getElementById(id);
+        const linkCls = 'inline-flex rounded-full border border-primary/20 px-5 py-2 text-sm font-medium text-primary transition-colors hover:border-primary/50';
+        let opener = null;
+        document.querySelectorAll('[data-dk-open]').forEach((btn) =>
+          btn.addEventListener('click', () => {
+            const i = +btn.dataset.dkOpen, d = dkData[i];
+            opener = btn;
+            $('dk-m-eyebrow').textContent = 'Project ' + String(i + 1).padStart(2, '0');
+            $('dk-m-title').textContent = d.title;
+            $('dk-m-body').innerHTML = d.body;
+            $('dk-m-links').innerHTML = d.url
+              ? `<a href="${d.url}" target="_blank" rel="noopener noreferrer" class="${linkCls}">Project Page</a>`
+              : '<span class="inline-flex rounded-full bg-muted/20 px-5 py-2 text-sm font-medium text-muted cursor-not-allowed" aria-disabled="true">Project Page</span>';
+            main.style.overflow = 'hidden';
+            dlg.showModal();
+          })
+        );
+        const close = () => dlg.close();
+        dlg.querySelector('[data-dk-close]').addEventListener('click', close);
+        dlg.addEventListener('click', (e) => { if (e.target === dlg) close(); });
+        dlg.addEventListener('close', () => { main.style.overflow = ''; if (opener) opener.focus(); });
+      })();
+
+      // Deck-deal scroll for #projects-b (scroller = <main>, smoothed progress, no deps)
+      (() => {
+        const track = document.querySelector('[data-dk]');
+        if (!track) return;
+        const cards = [...track.querySelectorAll('.dk-card')];
+        const shades = cards.map((c) => c.querySelector('.dk-shade'));
+        const n = cards.length;
+        track.style.setProperty('--n', n);
+        const desktop = matchMedia('(min-width: 768px)');
+        const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+        const clamp01 = (v) => Math.min(1, Math.max(0, v));
+        const easeOut = (t) => 1 - (1 - t) ** 3;
+        const span = Math.max(1, n - 1);
+        const arrived = (j, v) => (j <= 0 ? 1 : easeOut(clamp01((v * span - (j - 1)) / 0.72)));
+        let cur = 0, target = 0, raf = 0;
+        const paint = (v) => {
+          if (!desktop.matches) { cards.forEach((c) => { c.style.transform = ''; c.style.filter = ''; c.style.opacity = ''; }); return; }
+          cards.forEach((c, i) => {
+            const a = arrived(i, v);
+            let above = 0;
+            for (let j = i + 1; j < n; j++) above += arrived(j, v);
+            above = Math.min(3, above);
+            if (reduced.matches) {
+              c.style.transform = 'none'; c.style.filter = 'none';
+              c.style.opacity = a >= 0.5 ? 1 : 0; c.style.visibility = a >= 0.5 ? 'visible' : 'hidden';
+              shades[i].style.opacity = 0; return;
+            }
+            c.style.transform = `translate3d(0,${(1 - a) * 108 - above * 5}vh,0) rotateX(${-(1 - a) * 30 + above * 5}deg) scale(${0.9 + 0.1 * a - above * 0.05})`;
+            c.style.filter = `blur(${((1 - a) ** 2 * 12 + above * 1.1).toFixed(2)}px)`;
+            shades[i].style.opacity = above * 0.15;
+          });
+        };
+        const readTarget = () => {
+          const scrolled = main.getBoundingClientRect().top - track.getBoundingClientRect().top;
+          target = clamp01(scrolled / (track.offsetHeight - main.clientHeight));
+        };
+        const tick = () => {
+          cur += (target - cur) * 0.2;
+          if (Math.abs(target - cur) < 0.0005) cur = target;
+          paint(cur);
+          raf = cur === target ? 0 : requestAnimationFrame(tick);
+        };
+        const onScroll = () => { readTarget(); if (!raf) raf = requestAnimationFrame(tick); };
+        main.addEventListener('scroll', onScroll, { passive: true });
+        addEventListener('resize', onScroll);
+        desktop.addEventListener('change', onScroll);
+        readTarget(); cur = target; paint(cur);
+      })();
     </script>
   </body>
 </html>
